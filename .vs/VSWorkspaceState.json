@@ -5,8 +5,8 @@
     "\\WS-Monitoring\\Webclient",
     "\\WS-Monitoring\\Webclient\\Helper",
     "\\WS-Monitoring\\Webclient\\Models",
-    "\\WS-Monitoring\\Webclient\\Tests"
+    "\\WS-Monitoring\\Webclient\\Tests",
+    "\\WS-Monitoring\\Webclient\\Views"
   ],
-  "SelectedNode": "\\WS-Monitoring\\Webclient\\Tests\\XMLTest.cs",
   "PreviewInSolutionExplorer": false
 }
