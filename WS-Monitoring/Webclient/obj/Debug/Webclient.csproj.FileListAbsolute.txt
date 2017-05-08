@@ -64,5 +64,4 @@ C:\Users\C136123\Source\Repos\WS-Monitoring\WS-Monitoring\Webclient\bin\Microsof
 C:\Users\C136123\Source\Repos\WS-Monitoring\WS-Monitoring\Webclient\bin\Microsoft.AI.Web.xml
 C:\Users\C136123\Source\Repos\WS-Monitoring\WS-Monitoring\Webclient\obj\Debug\Webclient.dll
 C:\Users\C136123\Source\Repos\WS-Monitoring\WS-Monitoring\Webclient\obj\Debug\Webclient.pdb
-C:\Users\C136123\Source\Repos\WS-Monitoring\WS-Monitoring\Webclient\bin\Webclient.dll.CodeAnalysisLog.xml
-C:\Users\C136123\Source\Repos\WS-Monitoring\WS-Monitoring\Webclient\bin\Webclient.dll.lastcodeanalysissucceeded
+C:\Users\C136123\Source\Repos\WS-Monitoring\WS-Monitoring\Webclient\obj\Debug\Webclient.csprojResolveAssemblyReference.cache
