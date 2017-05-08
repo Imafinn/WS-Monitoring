@@ -147,6 +147,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\IServiceRepo.cs" />
+    <Compile Include="Helper\ServiceRepo.cs" />
     <Compile Include="Helper\ServiceRepoFake.cs" />
     <Compile Include="Models\ServiceExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
