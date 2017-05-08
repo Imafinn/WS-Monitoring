@@ -12,7 +12,7 @@ namespace Webclient.Models
         public ServiceList() {
             Items = new List<ServiceExtended>();
         }
-        [XmlElement("Service")]
+        [XmlElement("service")]
         public List<ServiceExtended> Items { get; set; }
     }
 }

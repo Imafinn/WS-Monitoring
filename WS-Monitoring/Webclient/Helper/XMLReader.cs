@@ -12,15 +12,16 @@ namespace Webclient.Helper
     {
         public static List<ServiceExtended> ReadServices()
         {
+            ServiceList list = new ServiceList();
             List<ServiceExtended> items = new List<ServiceExtended>();
             using (var reader = new StreamReader("G:/PUBLIC/winflex/test.xml"))
             {
-                XmlSerializer deserializer = new XmlSerializer(typeof(List<ServiceExtended>),
+                XmlSerializer deserializer = new XmlSerializer(typeof(ServiceList),
                     new XmlRootAttribute("services"));
-                items = (List<ServiceExtended>)deserializer.Deserialize(reader);
+                list = (ServiceList)deserializer.Deserialize(reader);
             }
-
-            return items;
+            
+            return list.Items;
         }
     }
 }
