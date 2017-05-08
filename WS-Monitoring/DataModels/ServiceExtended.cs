@@ -7,6 +7,11 @@ namespace DataModels
 {
     public class ServiceExtended
     {
+        public ServiceExtended()
+        {
+
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
