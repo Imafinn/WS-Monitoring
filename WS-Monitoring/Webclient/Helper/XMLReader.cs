@@ -13,7 +13,7 @@ namespace Webclient.Helper
         static List<ServiceExtended> readServices()
         {
             List<ServiceExtended> items = new List<ServiceExtended>();
-            using (var reader = new StreamReader("C:/test/text.xml"))
+            using (var reader = new StreamReader("G:/PUBLIC/winflex/text.xml"))
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<ServiceExtended>),
                     new XmlRootAttribute("services"));
