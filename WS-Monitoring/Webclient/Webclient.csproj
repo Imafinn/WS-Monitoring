@@ -76,6 +76,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess">
+      <HintPath>..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.ServiceProcess.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -139,6 +142,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\IServiceRepo.cs" />
+    <Compile Include="Helper\ServiceFactory.cs" />
     <Compile Include="Helper\ServiceRepo.cs" />
     <Compile Include="Helper\ServiceRepoFake.cs" />
     <Compile Include="Helper\XMLReader.cs" />
