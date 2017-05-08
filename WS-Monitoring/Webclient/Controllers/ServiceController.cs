@@ -13,7 +13,7 @@ namespace Webclient.Controllers
 
         public ServiceController()
         {
-            _repo = new ServiceRepoFake();
+            _repo = new ServiceRepo();
         }
 
         [HttpGet]
