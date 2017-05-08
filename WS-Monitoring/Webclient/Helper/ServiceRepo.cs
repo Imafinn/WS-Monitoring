@@ -13,7 +13,7 @@ namespace Webclient.Helper
 
         public ServiceRepo()
         {
-            _servicesBasic = XMLReader.readServices();
+            _servicesBasic = XMLReader.ReadServices();
         }
 
         public List<ServiceExtended> GetAll()
