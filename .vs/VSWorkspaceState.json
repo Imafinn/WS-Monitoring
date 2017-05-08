@@ -2,14 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\WS-Monitoring",
-    "\\WS-Monitoring\\DataModels",
     "\\WS-Monitoring\\Webclient",
-    "\\WS-Monitoring\\Webclient\\Controllers",
     "\\WS-Monitoring\\Webclient\\Helper",
     "\\WS-Monitoring\\Webclient\\Models",
-    "\\WS-Monitoring\\Webclient\\Views",
-    "\\WS-Monitoring\\Webclient\\Views\\Service"
+    "\\WS-Monitoring\\Webclient\\Views"
   ],
-  "SelectedNode": "\\WS-Monitoring\\Webclient\\Helper\\ServiceRepo.cs",
+  "SelectedNode": "\\WS-Monitoring\\Webclient\\Views",
   "PreviewInSolutionExplorer": false
 }
