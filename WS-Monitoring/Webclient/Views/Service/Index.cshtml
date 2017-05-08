@@ -14,16 +14,15 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-6">@s.Name @s.Id</div>
                 <!-- TODO: Farbe pro Status anpassen -->
-                <div class="col-sm-12 col-md-6 col-lg-6">@s.Status</div>
+                <div class="col-sm-12 col-md-6 col-lg-6">Status aus Servicecontroller</div>
             </div>
-            
-            <br />
-            <div data-toggle="collapse" data-target="serviceDescription" + @s.Id>Description</div>
-            <div id="serviceDescription" + @s.Id>
-                @s.Description
+			<br />
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#serviceDescription_@s.Id">Description</button>
+            <div id="serviceDescription_@s.Id" class="collapse">
+                Beschreibung aus Servicecontroller
             </div>
         </div>
-        
+
         <!-- Zwischenteil -->
         <div class="col-sm-0 col-md-2 col-lg-2"></div>
 
@@ -37,6 +36,6 @@
             </div>
         </div>
     </div>
-    <br />
+	<br />
 }
 
