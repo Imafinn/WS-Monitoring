@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\WS-Monitoring"
+    "\\WS-Monitoring",
+    "\\WS-Monitoring\\Webclient",
+    "\\WS-Monitoring\\Webclient\\Models"
   ],
-  "SelectedNode": "\\WS-Monitoring\\WS-Monitoring.sln",
+  "SelectedNode": "\\WS-Monitoring\\Webclient\\Models\\Service.cs",
   "PreviewInSolutionExplorer": false
 }
