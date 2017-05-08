@@ -12,9 +12,5 @@ namespace Webclient.Models
         public int Id { get; set; }
         [XmlElement("name")]
         public string Name { get; set; }
-        [XmlElement("description")]
-        public string Description { get; set; }
-        [XmlElement("status")]
-        public string Status { get; set; }
     }
 }
