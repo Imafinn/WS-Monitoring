@@ -17,10 +17,18 @@
                 <div class="col-sm-12 col-md-6 col-lg-6">Status aus Servicecontroller</div>
             </div>
 			<br />
-            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#serviceDescription_@s.Id">Description</button>
-            <div id="serviceDescription_@s.Id" class="collapse">
-                Beschreibung aus Servicecontroller
-            </div>
+			<div class="panel-group">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" href="#collapse_@s.Id">Description</a>
+						</h4>
+					</div>
+					<div id="collapse_@s.Id" class="panel-collapse collapse">
+						<div class="panel-body">Description from Servicecontroller</div>
+					</div>
+				</div>
+			</div>
         </div>
 
         <!-- Zwischenteil -->
