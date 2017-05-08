@@ -150,7 +150,6 @@
     <Compile Include="Helper\ServiceRepo.cs" />
     <Compile Include="Helper\ServiceRepoFake.cs" />
     <Compile Include="Helper\XMLReader.cs" />
-    <Compile Include="Models\Service.cs" />
     <Compile Include="Models\ServiceExtended.cs" />
     <Compile Include="Models\ServiceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
