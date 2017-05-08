@@ -1,0 +1,33 @@
+﻿@using Webclient.Models;
+@model List<ServiceExtended>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Monitor</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (var s in Model) {
+    <!-- Service -->
+    <div>
+        <div>
+            <div>@s.Name @s.Id</div>
+            <!-- TODO: Farbe pro Status anpassen -->
+            <div>@s.Status</div>
+            <br />
+            <div>@Html.DisplayFor(model => s.Description)</div>
+
+        </div>
+        <div>
+            <!-- Momentaner Status ausgrauen -->
+            <div>@Html.ActionLink("Start", "Start", new { id = s.Id })</div>
+            <div></div>    
+            <div></div>
+        </div>
+    </div>
+}
+
