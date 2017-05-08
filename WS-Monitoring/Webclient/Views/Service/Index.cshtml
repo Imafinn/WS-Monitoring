@@ -10,10 +10,13 @@
 @foreach (var s in Model) {
     <!-- Service -->
     <div class="row">
-        <div class="col-6">
-            <div>@s.Name @s.Id</div>
-            <!-- TODO: Farbe pro Status anpassen -->
-            <div>@s.Status</div>
+        <div class="col-sm-6 col-md-5 col-lg-5">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-6">@s.Name @s.Id</div>
+                <!-- TODO: Farbe pro Status anpassen -->
+                <div class="col-sm-12 col-md-6 col-lg-6">@s.Status</div>
+            </div>
+            
             <br />
             <div data-toggle="collapse" data-target="serviceDescription" + @s.Id>Description</div>
             <div id="serviceDescription" + @s.Id>
@@ -22,14 +25,18 @@
         </div>
         
         <!-- Zwischenteil -->
-        <div class="col-4" />
+        <div class="col-sm-0 col-md-2 col-lg-2"></div>
 
-        <div class="col-6">
+        <div class="col-sm-6 col-md-5 col-lg-5">
             <!-- Momentaner Status ausgrauen -->
-            <div>@Html.ActionLink("Start", "Start", new { id = s.Id }, new { @class = "btn btn-success" })</div>
-            <div>@Html.ActionLink("Stop", "Stop", new { id = s.Id }, new { @class = "btn btn-danger" })</div>    
-            <div>@Html.ActionLink("Restart", "Restart", new { id = s.Id }, new { @class = "btn btn-warning" })</div>
+            <div class="row">
+
+                <div class="col-sm-12 col-md-4 col-lg-4">@Html.ActionLink("Start", "Start", new { id = s.Id }, new { @class = "btn btn-success" })</div>
+                <div class="col-sm-12 col-md-4 col-lg-4">@Html.ActionLink("Stop", "Stop", new { id = s.Id }, new { @class = "btn btn-danger" })</div>
+                <div class="col-sm-12 col-md-4 col-lg-4">@Html.ActionLink("Restart", "Restart", new { id = s.Id }, new { @class = "btn btn-warning" })</div>
+            </div>
         </div>
     </div>
+    <br />
 }
 
