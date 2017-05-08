@@ -10,7 +10,7 @@ namespace Webclient.Helper
 {
     public class XMLReader
     {
-        static List<ServiceExtended> readServices()
+        public static List<ServiceExtended> readServices()
         {
             List<ServiceExtended> items = new List<ServiceExtended>();
             using (var reader = new StreamReader("G:/PUBLIC/winflex/text.xml"))
