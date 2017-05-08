@@ -2,4 +2,5 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/WS-Monitoring/v15/.suo
+/.vs
+/WS-Monitoring/.vs
