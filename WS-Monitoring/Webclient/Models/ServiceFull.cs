@@ -21,6 +21,7 @@ namespace Webclient.Models
         /// <param name="service">ServiceController with valid data.</param>
         public ServiceFull(ServiceController service, int id)
         {
+            Service = service;
             DisplayName = service.DisplayName;
             Status = service.Status.ToString().ToLower();
             Description = $"Servicetype: {service.ServiceType.ToString()}; " +
@@ -60,5 +61,10 @@ namespace Webclient.Models
         /// </summary>
         /// <value>The Identification is the Id and the Name concatenated and every blank is replaced by an '_'</value>
         public string Identification { get; set; }
+        /// <summary>
+        /// Service property.
+        /// </summary>
+        /// <value>Contains the associated ServiceController.</value>
+        public ServiceController Service { get; set; }
     }
 }
