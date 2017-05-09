@@ -27,23 +27,23 @@ namespace Webclient.Helper
             return _services;
         }
 
-        public ServiceFull Restart(int id)
+        public ServiceFull Restart(int id, string name)
         {
-            ServiceFull service = _services.First(s => s.Id == id);
+            ServiceFull service = _services.First(s => s.Id == id && s.Name.Equals(name));
             Console.WriteLine("Restarting Service: " + service.Name);
             return service;
         }
 
-        public ServiceFull Start(int id)
+        public ServiceFull Start(int id, string name)
         {
-            ServiceFull service = _services.First(s => s.Id == id);
+            ServiceFull service = _services.First(s => s.Id == id && s.Name.Equals(name));
             Console.WriteLine("Starting Service: " + service.Name);
             return service;
         }
 
-        public ServiceFull Stop(int id)
+        public ServiceFull Stop(int id, string name)
         {
-            ServiceFull service = _services.First(s => s.Id == id);
+            ServiceFull service = _services.First(s => s.Id == id && s.Name.Equals(name));
             Console.WriteLine("Stopping Service: " + service.Name);
             return service;
         }

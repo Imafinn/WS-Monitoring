@@ -14,13 +14,17 @@ namespace Webclient.Models
         {
         }
 
+        /// <summary>
+        /// This constructor parses the ServiceController into the necessary data for this class.
+        /// </summary>
+        /// <param name="service">ServiceController with valid data.</param>
         public ServiceFull(ServiceController service)
         {
             Name = service.DisplayName;
             Status = service.Status.ToString().ToLower();
-            Description = "Machinename: " + service.MachineName + "\n" +
-                          "Servicetype: " + service.ServiceType.ToString() + "\n" + 
-                          "Can pause and continue: " + service.CanPauseAndContinue;
+            Description = $"Machinename: {service.MachineName} \n" +
+                          $"Servicetype: {service.ServiceType.ToString()} \n" +
+                          $"Can pause and continue: {service.CanPauseAndContinue}";
         }
 
         /// <summary>

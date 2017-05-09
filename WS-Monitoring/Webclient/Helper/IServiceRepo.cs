@@ -21,19 +21,22 @@ namespace Webclient.Helper
         /// Starts the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
+        /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceFull Start(int id);
+        ServiceFull Start(int id, string name);
         /// <summary>
         /// Stops the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
+        /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceFull Stop(int id);
+        ServiceFull Stop(int id, string name);
         /// <summary>
         /// Restarts the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
+        /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceFull Restart(int id);
+        ServiceFull Restart(int id, string name);
     }
 }

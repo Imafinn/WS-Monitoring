@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceProcess;
 using System.Web;
 using Webclient.Models;
 
@@ -42,25 +43,32 @@ namespace Webclient.Helper
             return _servicesExtended;
         }
 
-        public ServiceFull Restart(int id)
+        public ServiceFull Restart(int id, string name)
         {
-            ServiceFull service = _servicesExtended.First(s => s.Id == id);
+            ServiceController service = _serviceFactory.GetService(id, name);
+            service.Stop();
+            service.Start();
+            service.Refresh();
 
-            return service;
+            return new ServiceFull(service) { Id = id };
         }
 
-        public ServiceFull Start(int id)
+        public ServiceFull Start(int id, string name)
         {
-            ServiceFull service = _servicesExtended.First(s => s.Id == id);
+            ServiceController service = _serviceFactory.GetService(id, name);
+            service.Start();
+            service.Refresh();
 
-            return service;
+            return new ServiceFull(service) { Id = id };
         }
 
-        public ServiceFull Stop(int id)
+        public ServiceFull Stop(int id, string name)
         {
-            ServiceFull service = _servicesExtended.First(s => s.Id == id);
+            ServiceController service = _serviceFactory.GetService(id, name);
+            service.Stop();
+            service.Refresh();
 
-            return service;
+            return new ServiceFull(service) { Id = id };
         }
     }
 }
