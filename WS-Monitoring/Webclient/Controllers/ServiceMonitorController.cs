@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Webclient.Helper;
 
 namespace Webclient.Controllers
@@ -41,9 +37,9 @@ namespace Webclient.Controllers
         /// <param name="id">Id of the associated service.</param>
         /// <returns>Returns the Index.cshtml</returns>
         [HttpGet]
-        public ActionResult Start(int id)
+        public ActionResult Start(int id, string name)
         {
-            _repo.Start(id);
+            _repo.Start(id, name);
 
             return RedirectToAction("Index", "ServiceMonitor");
         }
@@ -54,9 +50,9 @@ namespace Webclient.Controllers
         /// <param name="id">Id of the associated service.</param>
         /// <returns>Returns the Index.cshtml</returns>
         [HttpGet]
-        public ActionResult Stop(int id)
+        public ActionResult Stop(int id, string name)
         {
-            _repo.Stop(id);
+            _repo.Stop(id, name);
 
             return RedirectToAction("Index", "ServiceMonitor");
         }
@@ -67,9 +63,9 @@ namespace Webclient.Controllers
         /// <param name="id">Id of the associated service.</param>
         /// <returns>Returns the Index.cshtml</returns>
         [HttpGet]
-        public ActionResult Restart(int id)
+        public ActionResult Restart(int id, string name)
         {
-            _repo.Restart(id);
+            _repo.Restart(id, name);
 
             return RedirectToAction("Index", "ServiceMonitor");
         }
