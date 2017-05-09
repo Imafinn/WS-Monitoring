@@ -16,13 +16,13 @@ namespace Webclient.Models
         /// Creates a new list of type ServiceExtended
         /// </summary>
         public ServiceList() {
-            Items = new List<ServiceExtended>();
+            Items = new List<ServiceXML>();
         }
         /// <summary>
         /// List of Services
         /// </summary>
         /// <value>Contains Services to be monitored</value>
         [XmlElement("service")]
-        public List<ServiceExtended> Items { get; set; }
+        public List<ServiceXML> Items { get; set; }
     }
 }

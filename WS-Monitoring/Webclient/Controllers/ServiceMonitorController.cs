@@ -10,7 +10,7 @@ namespace Webclient.Controllers
     /// <summary>
     /// Controller is responsible for the view Index.cshtml
     /// </summary>
-    public class ServiceController : Controller
+    public class ServiceMonitorController : Controller
     {
         /// <summary>
         /// The ServiceRepository executes the different actions with services.
@@ -20,9 +20,9 @@ namespace Webclient.Controllers
         /// <summary>
         /// Constructor initalizes the ServiceRepository.
         /// </summary>
-        public ServiceController()
+        public ServiceMonitorController()
         {
-            _repo = new ServiceRepo();
+            _repo = new ServiceRepoFake();
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Webclient.Controllers
         {
             _repo.Start(id);
 
-            return RedirectToAction("Index", "Service");
+            return RedirectToAction("Index", "ServiceMonitor");
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Webclient.Controllers
         {
             _repo.Stop(id);
 
-            return RedirectToAction("Index", "Service");
+            return RedirectToAction("Index", "ServiceMonitor");
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Webclient.Controllers
         {
             _repo.Restart(id);
 
-            return RedirectToAction("Index", "Service");
+            return RedirectToAction("Index", "ServiceMonitor");
         }
     }
 }

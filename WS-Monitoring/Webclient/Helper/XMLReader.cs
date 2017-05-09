@@ -17,10 +17,10 @@ namespace Webclient.Helper
         /// Reads a Xml File and Serializes it into the ServiceExtended class.
         /// </summary>
         /// <returns>A list containing information about services to be monitored.</returns>
-        public static List<ServiceExtended> ReadServices()
+        public static List<ServiceXML> ReadServices()
         {
             ServiceList list = new ServiceList();
-            List<ServiceExtended> items = new List<ServiceExtended>();
+            List<ServiceXML> items = new List<ServiceXML>();
             using (var reader = new StreamReader("G:/PUBLIC/winflex/test.xml"))
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(ServiceList),
