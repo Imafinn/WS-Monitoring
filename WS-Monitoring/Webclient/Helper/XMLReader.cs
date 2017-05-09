@@ -8,8 +8,15 @@ using Webclient.Models;
 
 namespace Webclient.Helper
 {
+    /// <summary>
+    /// Reads a Xml File.
+    /// </summary>
     public class XMLReader
     {
+        /// <summary>
+        /// Reads a Xml File and Serializes it into the ServiceExtended class.
+        /// </summary>
+        /// <returns>A list containing information about services to be monitored.</returns>
         public static List<ServiceExtended> ReadServices()
         {
             ServiceList list = new ServiceList();
