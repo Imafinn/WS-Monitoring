@@ -7,9 +7,9 @@ using System.Xml.Serialization;
 namespace Webclient.Models
 {
     /// <summary>
-    /// Information about a service to be monitored.
+    /// Information from the .xml input about a service to be monitored.
     /// </summary>
-    public class ServiceExtended
+    public class ServiceXML
     {
         /// <summary>
         /// Id property.

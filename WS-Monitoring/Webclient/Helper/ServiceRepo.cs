@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.ServiceProcess;
 using Webclient.Models;
 
 namespace Webclient.Helper
@@ -15,11 +12,12 @@ namespace Webclient.Helper
         /// <summary>
         /// List received by the XMLReader, it contains the basic services.
         /// </summary>
-        private List<ServiceExtended> _servicesBasic;
+        private List<ServiceXML> _servicesBasic;
         /// <summary>
         /// List received by the ServiceController, it contains the extended services.
         /// </summary>
-        private List<ServiceExtended> _servicesExtended;
+        private List<ServiceFull> _servicesExtended;
+        private ServiceFactory _serviceFactory;
 
         /// <summary>
         /// In the Constructor the servicelists get initalized.
@@ -27,32 +25,46 @@ namespace Webclient.Helper
         public ServiceRepo()
         {
             _servicesBasic = XMLReader.ReadServices();
+            _servicesExtended = new List<ServiceFull>();
+            _serviceFactory = new ServiceFactory();
+
+            foreach (ServiceXML s in _servicesBasic)
+            {
+                _servicesExtended.Add(new ServiceFull(_serviceFactory.GetService(s.Id, s.Name)) { Id = s.Id });
+            }
         }
 
-        public List<ServiceExtended> GetAll()
+        public List<ServiceFull> GetAll()
         {
-            return _servicesBasic;
+            return _servicesExtended;
         }
 
-        public ServiceExtended Restart(int id)
+        public ServiceFull Restart(int id, string name)
         {
-            ServiceExtended service = _servicesBasic.First(s => s.Id == id);
+            ServiceController service = _serviceFactory.GetService(id, name);
+            service.Stop();
+            service.Start();
+            service.Refresh();
 
-            return service;
+            return new ServiceFull(service) { Id = id };
         }
 
-        public ServiceExtended Start(int id)
+        public ServiceFull Start(int id, string name)
         {
-            ServiceExtended service = _servicesBasic.First(s => s.Id == id);
+            ServiceController service = _serviceFactory.GetService(id, name);
+            service.Start();
+            service.Refresh();
 
-            return service;
+            return new ServiceFull(service) { Id = id };
         }
 
-        public ServiceExtended Stop(int id)
+        public ServiceFull Stop(int id, string name)
         {
-            ServiceExtended service = _servicesBasic.First(s => s.Id == id);
+            ServiceController service = _serviceFactory.GetService(id, name);
+            service.Stop();
+            service.Refresh();
 
-            return service;
+            return new ServiceFull(service) { Id = id };
         }
     }
 }

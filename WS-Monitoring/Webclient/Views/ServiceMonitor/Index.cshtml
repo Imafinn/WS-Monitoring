@@ -1,13 +1,17 @@
 ﻿@using Webclient.Models;
-@model List<ServiceExtended>
+@model List<ServiceFull>
 
 @{
     ViewBag.Title = "Index";
-    // Dictionary für das Färben des Status
+    // Dictionary for the colorization of the status
     ViewBag.FontColors = new Dictionary<string, string>();
     ViewBag.FontColors.Add("stopped", "red");
+    ViewBag.FontColors.Add("startpending", "lightgreen");
+    ViewBag.FontColors.Add("stoppending", "lightred");
     ViewBag.FontColors.Add("running", "green");
-    ViewBag.FontColors.Add("restarting", "orange");
+    ViewBag.FontColors.Add("continuepending", "orange");
+    ViewBag.FontColors.Add("pausepending", "orange");
+    ViewBag.FontColors.Add("paused", "grey");
 }
 
 <h2>Monitor</h2>
@@ -20,20 +24,20 @@
             <div class="row">
                 <div class="col-sm-6 col-md-5 col-lg-5">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-6">@s.Name @s.Id</div>
+                        <div class="col-sm-12 col-md-6 col-lg-6">@s.Name : @s.Id</div>
                         <!-- TODO: Farbe pro Status anpassen => mit Dictionary in ViewBag -->
-                        <div class="col-sm-12 col-md-6 col-lg-6"><font color="@ViewBag.FontColors["stopped"]">[Status aus Servicecontroller]</font></div>
+                        <div class="col-sm-12 col-md-6 col-lg-6"><font color="@ViewBag.FontColors[s.Status]">@s.Status</font></div>
                     </div>
                     <br />
                     <div class="panel-group">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" href="#collapse_@s.Id">Description</a>
+                                    <a data-toggle="collapse" href="#collapse_@s.Identification">Description</a>
                                 </h4>
                             </div>
-                            <div id="collapse_@s.Id" class="panel-collapse collapse">
-                                <div class="panel-body">[Description from Servicecontroller]</div>
+                            <div id="collapse_@s.Identification" class="panel-collapse collapse">
+                                <div class="panel-body">@s.Description</div>
                             </div>
                         </div>
                     </div>
@@ -45,9 +49,9 @@
                 <div class="col-sm-6 col-md-5 col-lg-5">
                     <!-- Momentaner Status ausgrauen -->
                     <div class="row">                       
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Start", "Start", new { id = s.Id }, new { @class = "btn btn-success" })</div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Stop", "Stop", new { id = s.Id }, new { @class = "btn btn-danger" })</div>  
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Restart", "Restart", new { id = s.Id }, new { @class = "btn btn-warning" })</div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Start", "Start", new { id = s.Id, name = s.Name }, new { @class = "btn btn-success" })</div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Stop", "Stop", new { id = s.Id, name = s.Name }, new { @class = "btn btn-danger" })</div>  
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Restart", "Restart", new { id = s.Id, name = s.Name }, new { @class = "btn btn-warning" })</div>
                     </div>
                 </div>
             </div>
