@@ -14,25 +14,44 @@ namespace Webclient.Helper
 
         }
 
-        public ServiceController GetService(int id)
+        public ServiceController GetService(int id, string name)
         {
-            string processName = Process.GetProcessById(id).ProcessName;
-            List<ServiceController> matchingServices = ServiceController.GetServices()
-                                                                        .Where(sc => sc.ServiceName.Equals(processName))
-                                                                        .ToList();
+            Process match = null;
+            try
+            {
+                Process[] processes = Process.GetProcessesByName(name);
+                foreach (var p in processes)
+                {
+                    if (p.Id == id)
+                    {
+                        match = p;
+                        break;
+                    }
+                }
+            }
+            catch (ArgumentException) { }
 
-            if(matchingServices.Count == 1)
+            List<ServiceController> matchingServices = new List<ServiceController>();
+            if (match != null)
+            {
+                matchingServices = ServiceController.GetServices()
+                                                    .Where(sc => sc.ServiceName.Equals(match.ProcessName))
+                                                    .ToList();
+            }
+
+            if (matchingServices.Count == 1)
             {
                 return matchingServices[0];
             }
-            else if(matchingServices.Count == 0)
+            else if (matchingServices.Count == 0)
             {
-                throw new ArgumentException($"No Services found with the ID '{id}'");
+                throw new ArgumentException($"Found no Service with the ID '{id}'");
             }
             else
             {
                 throw new ArgumentException($"Found more than one Service with the ID '{id}'");
             }
         }
+
 	}
 }
