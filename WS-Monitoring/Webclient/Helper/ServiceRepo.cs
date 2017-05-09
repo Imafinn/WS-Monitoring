@@ -30,7 +30,7 @@ namespace Webclient.Helper
 
             foreach (ServiceXML s in _servicesBasic)
             {
-                _servicesExtended.Add(new ServiceFull(_serviceFactory.GetService(s.Id, s.Name)) { Id = s.Id });
+                _servicesExtended.Add(new ServiceFull(_serviceFactory.GetService(s.Id, s.Name), s.Id));
             }
         }
 
@@ -46,7 +46,7 @@ namespace Webclient.Helper
             service.Start();
             service.Refresh();
 
-            return new ServiceFull(service) { Id = id };
+            return new ServiceFull(service, id);
         }
 
         public ServiceFull Start(int id, string name)
@@ -55,7 +55,7 @@ namespace Webclient.Helper
             service.Start();
             service.Refresh();
 
-            return new ServiceFull(service) { Id = id };
+            return new ServiceFull(service, id);
         }
 
         public ServiceFull Stop(int id, string name)
@@ -64,7 +64,7 @@ namespace Webclient.Helper
             service.Stop();
             service.Refresh();
 
-            return new ServiceFull(service) { Id = id };
+            return new ServiceFull(service, id);
         }
     }
 }

@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-sm-6 col-md-5 col-lg-5">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-6">@s.Name : @s.Id</div>
+                        <div class="col-sm-12 col-md-6 col-lg-6">@s.DisplayName : @s.Id</div>
                         <!-- TODO: Farbe pro Status anpassen => mit Dictionary in ViewBag -->
                         <div class="col-sm-12 col-md-6 col-lg-6"><font color="@ViewBag.FontColors[s.Status]">@s.Status</font></div>
                     </div>
@@ -48,10 +48,22 @@
 
                 <div class="col-sm-6 col-md-5 col-lg-5">
                     <!-- Momentaner Status ausgrauen -->
-                    <div class="row">                       
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Start", "Start", new { id = s.Id, name = s.Name }, new { @class = "btn btn-success" })</div>
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Stop", "Stop", new { id = s.Id, name = s.Name }, new { @class = "btn btn-danger" })</div>  
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Restart", "Restart", new { id = s.Id, name = s.Name }, new { @class = "btn btn-warning" })</div>
+                    <div class="row">
+                        @if (s.Status.Equals("stopped") || s.Status.Equals("paused"))
+                        {
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Start", "Start", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-success" })</div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a class="btn-default">Stop</a></div>
+                        }
+                        else
+                        {
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a class="btn-default">Start</a></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Stop", "Stop", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-danger" })</div>
+                        }
+                        <!--
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Start", "Start", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-success" })</div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Stop", "Stop", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-danger" })</div>  
+                        -->
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Restart", "Restart", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-warning" })</div>
                     </div>
                 </div>
             </div>
