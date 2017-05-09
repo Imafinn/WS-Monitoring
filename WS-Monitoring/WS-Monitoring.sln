@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSTests", "WSTests\WSTests.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControllerTest", "ServiceControllerTest\ServiceControllerTest.csproj", "{F359F303-A42A-4B81-8F78-7FF42A655E65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWindowsService", "TestWindowsService\TestWindowsService.csproj", "{4674A613-BF5B-454D-81AF-FDD9A02B7183}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F359F303-A42A-4B81-8F78-7FF42A655E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F359F303-A42A-4B81-8F78-7FF42A655E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F359F303-A42A-4B81-8F78-7FF42A655E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4674A613-BF5B-454D-81AF-FDD9A02B7183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4674A613-BF5B-454D-81AF-FDD9A02B7183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4674A613-BF5B-454D-81AF-FDD9A02B7183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4674A613-BF5B-454D-81AF-FDD9A02B7183}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

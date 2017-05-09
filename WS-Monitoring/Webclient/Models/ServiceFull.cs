@@ -1,4 +1,5 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.ServiceProcess;
 
 namespace Webclient.Models
 {
@@ -18,13 +19,16 @@ namespace Webclient.Models
         /// This constructor parses the ServiceController into the necessary data for this class.
         /// </summary>
         /// <param name="service">ServiceController with valid data.</param>
-        public ServiceFull(ServiceController service)
+        public ServiceFull(ServiceController service, int id)
         {
-            Name = service.DisplayName;
+            Service = service;
+            DisplayName = service.DisplayName;
             Status = service.Status.ToString().ToLower();
-            Description = $"Machinename: {service.MachineName} \n" +
-                          $"Servicetype: {service.ServiceType.ToString()} \n" +
+            Description = $"Servicetype: {service.ServiceType.ToString()}; " +
                           $"Can pause and continue: {service.CanPauseAndContinue}";
+            Id = id;
+            ServiceName = service.ServiceName;
+            Identification = id + "_" + service.ServiceName.Replace(' ', '_'); 
         }
 
         /// <summary>
@@ -33,10 +37,15 @@ namespace Webclient.Models
         /// <value>The id of the service to be monitored.</value>
         public int Id { get; set; }
         /// <summary>
-        /// Name property.
+        /// DisplayName property.
         /// </summary>
-        /// <value>The name of the service to be monitored.</value>
-        public string Name { get; set; }
+        /// <value>The name of the service to be shown on the monitor view.</value>
+        public string DisplayName { get; set; }
+        /// <summary>
+        /// ServiceName property.
+        /// </summary>
+        /// <value>The name of the service from the .xml inputfile.</value>
+        public string ServiceName { get; set; }
         /// <summary>
         /// Status property.
         /// </summary>
@@ -51,12 +60,11 @@ namespace Webclient.Models
         /// An explicit identification property.
         /// </summary>
         /// <value>The Identification is the Id and the Name concatenated and every blank is replaced by an '_'</value>
-        public string Identification
-        {
-            get
-            {
-                return Id + "_" + Name.Replace(' ', '_');
-            }
-        }
+        public string Identification { get; set; }
+        /// <summary>
+        /// Service property.
+        /// </summary>
+        /// <value>Contains the associated ServiceController.</value>
+        public ServiceController Service { get; set; }
     }
 }

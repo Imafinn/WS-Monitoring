@@ -18,7 +18,7 @@ namespace Webclient.Controllers
         /// </summary>
         public ServiceMonitorController()
         {
-            _repo = new ServiceRepoFake();
+            _repo = new ServiceRepo();
         }
 
         /// <summary>
