@@ -22,6 +22,11 @@ namespace Webclient.Helper
                                  .ToList();
         }
 
+        public List<ServiceController> GetAllServices()
+        {
+            return ServiceController.GetServices().ToList();
+        }
+
         public ServiceController GetService(int id, string name)
         {
             Process match = null;

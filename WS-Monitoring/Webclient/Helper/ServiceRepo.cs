@@ -29,9 +29,16 @@ namespace Webclient.Helper
             _servicesExtended = new List<ServiceFull>();
             _serviceFactory = new ServiceFactory();
 
-            foreach (ServiceXML s in _servicesBasic)
+            //foreach (ServiceXML sXML in _servicesBasic)
+            //{
+            //    foreach (ServiceController s in _serviceFactory.GetServices(sXML.Name))
+            //    {
+            //        _servicesExtended.Add(new ServiceFull(s) { Id = _servicesExtended.Count + 1 });
+            //    }
+            //}
+            foreach (ServiceController s in _serviceFactory.GetAllServices())
             {
-                _servicesExtended.Add(new ServiceFull(_serviceFactory.GetService(s.Id, s.Name)) { Id = s.Id });
+                _servicesExtended.Add(new ServiceFull(s) { Id = _servicesExtended.Count + 1 });
             }
         }
 
