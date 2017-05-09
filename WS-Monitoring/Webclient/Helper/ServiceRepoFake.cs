@@ -19,6 +19,7 @@ namespace Webclient.Helper
 
             _services.Add(new ServiceFull() { Id = 1, Name = "Service one", Status = "stopped", Description = "Ein Service von vielen" });
             _services.Add(new ServiceFull() { Id = 2, Name = "Service dos", Status = "running", Description = "Ein anderer Service von vielen" });
+            _services.Add(new ServiceFull() { Id = 3, Name = "Service drei", Status = "paused", Description = "Ein anderer Service von einigen" });
         }
 
         public List<ServiceFull> GetAll()

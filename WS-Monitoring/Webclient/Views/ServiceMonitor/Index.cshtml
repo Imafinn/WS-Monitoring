@@ -6,8 +6,12 @@
     // Dictionary für das Färben des Status
     ViewBag.FontColors = new Dictionary<string, string>();
     ViewBag.FontColors.Add("stopped", "red");
+    ViewBag.FontColors.Add("startpending", "lightgreen");
+    ViewBag.FontColors.Add("stoppending", "lightred");
     ViewBag.FontColors.Add("running", "green");
-    ViewBag.FontColors.Add("restarting", "orange");
+    ViewBag.FontColors.Add("continuepending", "orange");
+    ViewBag.FontColors.Add("pausepending", "orange");
+    ViewBag.FontColors.Add("paused", "grey");
 }
 
 <h2>Monitor</h2>

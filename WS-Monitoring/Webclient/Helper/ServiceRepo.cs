@@ -33,7 +33,7 @@ namespace Webclient.Helper
 
             foreach (ServiceXML s in _servicesBasic)
             {
-                _servicesExtended.Add(new ServiceFull(_serviceFactory.GetService(s.Id)));
+                _servicesExtended.Add(new ServiceFull(_serviceFactory.GetService(s.Id, s.Name)) { Id = s.Id });
             }
         }
 

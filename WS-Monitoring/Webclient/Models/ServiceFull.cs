@@ -16,7 +16,11 @@ namespace Webclient.Models
 
         public ServiceFull(ServiceController service)
         {
-            
+            Name = service.DisplayName;
+            Status = service.Status.ToString().ToLower();
+            Description = "Machinename: " + service.MachineName + "\n" +
+                          "Servicetype: " + service.ServiceType.ToString() + "\n" + 
+                          "Can pause and continue: " + service.CanPauseAndContinue;
         }
 
         /// <summary>
