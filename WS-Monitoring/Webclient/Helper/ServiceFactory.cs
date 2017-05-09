@@ -14,6 +14,14 @@ namespace Webclient.Helper
 
         }
 
+        public List<ServiceController> GetServices(string name)
+        {
+            return
+                ServiceController.GetServices()
+                                 .Where(sc => sc.ServiceName.Equals(name))
+                                 .ToList();
+        }
+
         public ServiceController GetService(int id, string name)
         {
             Process match = null;

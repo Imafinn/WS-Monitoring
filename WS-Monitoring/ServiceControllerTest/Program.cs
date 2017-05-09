@@ -10,7 +10,8 @@ namespace ServiceControllerClientTest
 {
     class Program
     {
-        static string[] services = { "netprofm", "ose", "PerfHost", "cmd" };
+
+
         static void Main(string[] args)
         {
             foreach (var proc in Process.GetProcesses())
