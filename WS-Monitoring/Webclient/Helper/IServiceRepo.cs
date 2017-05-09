@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Webclient.Models;
 
 namespace Webclient.Helper
@@ -16,24 +12,27 @@ namespace Webclient.Helper
         /// This Method returns the extended services, received by the ServiceController.
         /// </summary>
         /// <returns>List of services with extended informations.</returns>
-        List<ServiceExtended> GetAll();
+        List<ServiceFull> GetAll();
         /// <summary>
         /// Starts the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
+        /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceExtended Start(int id);
+        ServiceFull Start(int id, string name);
         /// <summary>
         /// Stops the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
+        /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceExtended Stop(int id);
+        ServiceFull Stop(int id, string name);
         /// <summary>
         /// Restarts the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
+        /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceExtended Restart(int id);
+        ServiceFull Restart(int id, string name);
     }
 }
