@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceProcess;
+using System.Linq;
 using Webclient.Models;
 
 namespace Webclient.Helper
@@ -41,7 +42,7 @@ namespace Webclient.Helper
 
         public ServiceFull Restart(int id, string name)
         {
-            ServiceController service = _serviceFactory.GetService(id, name);
+            ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Stop();
             service.Start();
             service.Refresh();
@@ -51,7 +52,7 @@ namespace Webclient.Helper
 
         public ServiceFull Start(int id, string name)
         {
-            ServiceController service = _serviceFactory.GetService(id, name);
+            ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Start();
             service.Refresh();
 
@@ -60,11 +61,23 @@ namespace Webclient.Helper
 
         public ServiceFull Stop(int id, string name)
         {
-            ServiceController service = _serviceFactory.GetService(id, name);
+            //ServiceController service = _serviceFactory.GetService(id, name);
+            ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Stop();
             service.Refresh();
 
             return new ServiceFull(service, id);
+        }
+
+        /// <summary>
+        /// Internal method to receive the current ServiceController.
+        /// </summary>
+        /// <param name="id">Id of the current service.</param>
+        /// <param name="name">Name of the service.</param>
+        /// <returns>Returns the current ServiceController.</returns>
+        private ServiceController ReceiveCurrentServiceController(int id, string name)
+        {
+            return _servicesExtended.Where(s => s.Id == id && s.ServiceName.Equals(name)).First().Service;
         }
     }
 }
