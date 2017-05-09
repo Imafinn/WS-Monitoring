@@ -7,11 +7,23 @@ using Webclient.Models;
 
 namespace Webclient.Helper
 {
+    /// <summary>
+    /// ServiceRepo executes the different actions with services.
+    /// </summary>
     public class ServiceRepo : IServiceRepo
     {
+        /// <summary>
+        /// List received by the XMLReader, it contains the basic services.
+        /// </summary>
         private List<ServiceExtended> _servicesBasic;
-        //private List<ServiceExtended> _servicesExtended;
+        /// <summary>
+        /// List received by the ServiceController, it contains the extended services.
+        /// </summary>
+        private List<ServiceExtended> _servicesExtended;
 
+        /// <summary>
+        /// In the Constructor the servicelists get initalized.
+        /// </summary>
         public ServiceRepo()
         {
             _servicesBasic = XMLReader.ReadServices();
