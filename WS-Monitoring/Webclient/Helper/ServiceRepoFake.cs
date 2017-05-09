@@ -16,9 +16,9 @@ namespace Webclient.Helper
         {
             _services = new List<ServiceFull>();
 
-            _services.Add(new ServiceFull() { Id = 1, DisplayName = "Service one", ServiceName = "Service one", Status = "stopped", Description = "Ein Service von vielen" });
-            _services.Add(new ServiceFull() { Id = 2, DisplayName = "Service dos", ServiceName = "Service dos", Status = "running", Description = "Ein anderer Service von vielen" });
-            _services.Add(new ServiceFull() { Id = 3, DisplayName = "Service drei", ServiceName = "Service drei", Status = "paused", Description = "Ein anderer Service von einigen" });
+            //_services.Add(new ServiceFull() { Id = 1, DisplayName = "Service one", ServiceName = "Service one", Status = "stopped", Description = "Ein Service von vielen" });
+            //_services.Add(new ServiceFull() { Id = 2, DisplayName = "Service dos", ServiceName = "Service dos", Status = "running", Description = "Ein anderer Service von vielen" });
+            //_services.Add(new ServiceFull() { Id = 3, DisplayName = "Service drei", ServiceName = "Service drei", Status = "paused", Description = "Ein anderer Service von einigen" });
         }
 
         public List<ServiceFull> GetAll()
@@ -26,25 +26,22 @@ namespace Webclient.Helper
             return _services;
         }
 
-        public ServiceFull Restart(int id, string name)
+        public void Restart(int id, string name)
         {
             ServiceFull service = _services.First(s => s.Id == id && s.ServiceName.Equals(name));
             Console.WriteLine("Restarting Service: " + service.ServiceName);
-            return service;
         }
 
-        public ServiceFull Start(int id, string name)
+        public void Start(int id, string name)
         {
             ServiceFull service = _services.First(s => s.Id == id && s.ServiceName.Equals(name));
             Console.WriteLine("Starting Service: " + service.ServiceName);
-            return service;
         }
 
-        public ServiceFull Stop(int id, string name)
+        public void Stop(int id, string name)
         {
             ServiceFull service = _services.First(s => s.Id == id && s.ServiceName.Equals(name));
             Console.WriteLine("Stopping Service: " + service.ServiceName);
-            return service;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Webclient.Helper
 
             foreach (ServiceXML s in _servicesBasic)
             {
-                _servicesExtended.Add(new ServiceFull(_serviceFactory.GetService(s.Id, s.Name), s.Id));
+                _servicesExtended.Add(new ServiceFull(_serviceFactory.GetService(s.Id, s.Name)) { Id = s.Id });
             }
         }
 
@@ -40,33 +40,30 @@ namespace Webclient.Helper
             return _servicesExtended;
         }
 
-        public ServiceFull Restart(int id, string name)
+        public void Restart(int id, string name)
         {
             ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Stop();
+            service.WaitForStatus(ServiceControllerStatus.Stopped);
             service.Start();
+            service.WaitForStatus(ServiceControllerStatus.Running);
             service.Refresh();
-
-            return new ServiceFull(service, id);
         }
 
-        public ServiceFull Start(int id, string name)
+        public void Start(int id, string name)
         {
             ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Start();
+            service.WaitForStatus(ServiceControllerStatus.Running);
             service.Refresh();
-
-            return new ServiceFull(service, id);
         }
 
-        public ServiceFull Stop(int id, string name)
+        public void Stop(int id, string name)
         {
-            //ServiceController service = _serviceFactory.GetService(id, name);
             ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Stop();
+            service.WaitForStatus(ServiceControllerStatus.Stopped);
             service.Refresh();
-
-            return new ServiceFull(service, id);
         }
 
         /// <summary>

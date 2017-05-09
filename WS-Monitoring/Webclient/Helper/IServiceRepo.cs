@@ -6,7 +6,7 @@ namespace Webclient.Helper
     /// <summary>
     /// Interface for the ServiceRepository.
     /// </summary>
-    interface IServiceRepo
+    public interface IServiceRepo
     {
         /// <summary>
         /// This Method returns the extended services, received by the ServiceController.
@@ -19,20 +19,20 @@ namespace Webclient.Helper
         /// <param name="id">Id of the associated service.</param>
         /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceFull Start(int id, string name);
+        void Start(int id, string name);
         /// <summary>
         /// Stops the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
         /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceFull Stop(int id, string name);
+        void Stop(int id, string name);
         /// <summary>
         /// Restarts the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
         /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceFull Restart(int id, string name);
+        void Restart(int id, string name);
     }
 }
