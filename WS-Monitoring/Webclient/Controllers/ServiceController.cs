@@ -7,6 +7,9 @@ using Webclient.Helper;
 
 namespace Webclient.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ServiceController : Controller
     {
         private IServiceRepo _repo;
