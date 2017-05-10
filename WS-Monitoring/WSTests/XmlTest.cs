@@ -12,7 +12,7 @@ namespace WSTests
         [Test]
         public void ShouldReadXmlFile()
         {
-            List<ServiceExtended> list = new List<ServiceExtended>();
+            List<ServiceXML> list = new List<ServiceXML>();
             list = XMLReader.ReadServices();
             Assert.That(list.Count, Is.EqualTo(2));
         }

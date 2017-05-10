@@ -1,5 +1,4 @@
-﻿using Ninject;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web.Mvc;
 using Webclient.Helper;
 
