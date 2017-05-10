@@ -23,6 +23,7 @@ namespace Webclient.Models
         /// </summary>
         /// <value>The id of the service to be monitored.</value>
         public int Id { get; set; }
+
         /// <summary>
         /// DisplayName property.
         /// </summary>
@@ -34,6 +35,7 @@ namespace Webclient.Models
                 return Service.DisplayName;
             }
         }
+
         /// <summary>
         /// ServiceName property.
         /// </summary>
@@ -45,6 +47,7 @@ namespace Webclient.Models
                 return Service.ServiceName;
             }
         }
+
         /// <summary>
         /// Status property.
         /// </summary>
@@ -56,6 +59,7 @@ namespace Webclient.Models
                 return Service.Status.ToString().ToLower();
             }
         }
+
         /// <summary>
         /// Description property.
         /// </summary>
@@ -68,6 +72,7 @@ namespace Webclient.Models
                        $"Can pause and continue: {Service.CanPauseAndContinue}";
             }
         }
+
         /// <summary>
         /// An explicit identification property.
         /// </summary>
@@ -79,6 +84,7 @@ namespace Webclient.Models
                 return Id + "_" + Service.ServiceName.Replace(' ', '_');
             }
         }
+
         /// <summary>
         /// Service property.
         /// </summary>
