@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceProcess;
+using System.Management;
 
 namespace Webclient.Models
 {
@@ -68,8 +69,11 @@ namespace Webclient.Models
         {
             get
             {
-                return $"Servicetype: {Service.ServiceType.ToString()}; " +
-                       $"Can pause and continue: {Service.CanPauseAndContinue}";
+                ManagementObject wmiService = new ManagementObject($"Win32_Service.Name='{Service.ServiceName}'");
+                wmiService.Get();
+
+                // No .ToString() for the description, because it could be null and that would cause an exception.
+                return (string)wmiService["Description"] ?? "No description avaiable!"; ;
             }
         }
 
