@@ -52,11 +52,11 @@
                         @if (s.Status.Equals("stopped") || s.Status.Equals("paused"))
                         {
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Start", "Start", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-success" })</div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a class="btn-default">Stop</a></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a class="btn btn-danger" disabled>Stop</a></div>
                         }
                         else
                         {
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a class="btn-default">Start</a></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><a class="btn btn-success" disabled>Start</a></div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Stop", "Stop", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-danger" })</div>
                         }
                         <!--
