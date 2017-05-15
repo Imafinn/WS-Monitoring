@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Ninject;
+using System.Reflection;
 using System.Web.Mvc;
 using Webclient.Helper;
 
@@ -19,10 +20,9 @@ namespace Webclient.Controllers
         /// </summary>
         public ServiceMonitorController()
         {
-            //IKernel kernel = new StandardKernel();
-            //kernel.Load(Assembly.GetExecutingAssembly());
-            //_repo = kernel.Get<IServiceRepo>();
-            _repo = new ServiceRepo();
+            IKernel kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+            _repo = kernel.Get<IServiceRepo>();
         }
 
         /// <summary>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ServiceProcess;
+using System.Management;
+using System.Diagnostics;
 
 namespace Webclient.Models
 {
@@ -23,6 +25,7 @@ namespace Webclient.Models
         /// </summary>
         /// <value>The id of the service to be monitored.</value>
         public int Id { get; set; }
+
         /// <summary>
         /// DisplayName property.
         /// </summary>
@@ -34,6 +37,7 @@ namespace Webclient.Models
                 return Service.DisplayName;
             }
         }
+
         /// <summary>
         /// ServiceName property.
         /// </summary>
@@ -45,6 +49,7 @@ namespace Webclient.Models
                 return Service.ServiceName;
             }
         }
+
         /// <summary>
         /// Status property.
         /// </summary>
@@ -56,6 +61,7 @@ namespace Webclient.Models
                 return Service.Status.ToString().ToLower();
             }
         }
+
         /// <summary>
         /// Description property.
         /// </summary>
@@ -64,10 +70,14 @@ namespace Webclient.Models
         {
             get
             {
-                return $"Servicetype: {Service.ServiceType.ToString()}; " +
-                       $"Can pause and continue: {Service.CanPauseAndContinue}";
+                ManagementObject wmiService = new ManagementObject($"Win32_Service.Name='{Service.ServiceName}'");
+                wmiService.Get();      
+
+                // No .ToString() for the description, because it could be null and that would cause an exception.
+                return (string)wmiService["Description"] ?? "No description avaiable!"; ;
             }
         }
+
         /// <summary>
         /// An explicit identification property.
         /// </summary>
@@ -79,6 +89,15 @@ namespace Webclient.Models
                 return Id + "_" + Service.ServiceName.Replace(' ', '_');
             }
         }
+
+        public string Performance
+        {
+            get
+            {
+                return "";
+            }
+        }
+
         /// <summary>
         /// Service property.
         /// </summary>
