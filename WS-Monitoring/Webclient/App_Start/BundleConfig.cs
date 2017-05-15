@@ -24,7 +24,9 @@ namespace Webclient
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/dev").Include(
-                        "~/Scripts/button-control.js"));
+                        "~/Scripts/button-control.js",
+                        "~/Scripts/jquery.signalR-2.2.2.js",
+                        "~/signalr/hubs"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
