@@ -25,8 +25,9 @@ namespace Webclient.Helper
             foreach (ServiceFull service in ServiceList)
             {
                 string query = $"SELECT ProcessId FROM Win32_Service WHERE Name = '{service.ServiceName}'";
-                ManagementObjectSearcher searcher =
-                    new ManagementObjectSearcher(query);
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
+
+
                 foreach (ManagementObject obj in searcher.Get())
                 {
                     int processId = Int32.Parse(obj["processId"].ToString());
