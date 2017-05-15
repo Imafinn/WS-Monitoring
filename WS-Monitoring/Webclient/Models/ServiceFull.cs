@@ -90,13 +90,8 @@ namespace Webclient.Models
             }
         }
 
-        public string Performance
-        {
-            get
-            {
-                return "";
-            }
-        }
+        public string PerformanceCPU { get; set; }
+        public string PerformanceRAM { get; set; }
 
         /// <summary>
         /// Service property.

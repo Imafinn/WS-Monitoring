@@ -167,7 +167,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\IPerformanceTimer.cs" />
     <Compile Include="Helper\IServiceRepo.cs" />
+    <Compile Include="Helper\PerformanceTimer.cs" />
     <Compile Include="Helper\ServiceFactory.cs" />
     <Compile Include="Helper\ServiceRepo.cs" />
     <Compile Include="Helper\ServiceRepoFake.cs" />
