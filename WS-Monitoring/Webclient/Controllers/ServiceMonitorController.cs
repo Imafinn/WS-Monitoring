@@ -35,43 +35,45 @@ namespace Webclient.Controllers
             return View(_repo.GetAll());
         }
 
-        /// <summary>
-        /// Starts a service and refreshes the view.
-        /// </summary>
-        /// <param name="id">Id of the associated service.</param>
-        /// <returns>Returns the Index.cshtml</returns>
-        [HttpGet]
-        public ActionResult Start(int id, string name)
-        {
-            _repo.Start(id, name);
+        // Start, Stop & Restart Methods aren't used anymore. This calls will be done by JS(SignalR).
 
-            return RedirectToAction("Index", "ServiceMonitor");
-        }
+        ///// <summary>
+        ///// Starts a service and refreshes the view.
+        ///// </summary>
+        ///// <param name="id">Id of the associated service.</param>
+        ///// <returns>Returns the Index.cshtml</returns>
+        //[HttpGet]
+        //public ActionResult Start(int id, string name)
+        //{
+        //    _repo.Start(id, name);
 
-        /// <summary>
-        /// Stops a service and refreshes the view
-        /// </summary>
-        /// <param name="id">Id of the associated service.</param>
-        /// <returns>Returns the Index.cshtml</returns>
-        [HttpGet]
-        public ActionResult Stop(int id, string name)
-        {
-            _repo.Stop(id, name);
+        //    return RedirectToAction("Index", "ServiceMonitor");
+        //}
 
-            return RedirectToAction("Index", "ServiceMonitor");
-        }
+        ///// <summary>
+        ///// Stops a service and refreshes the view
+        ///// </summary>
+        ///// <param name="id">Id of the associated service.</param>
+        ///// <returns>Returns the Index.cshtml</returns>
+        //[HttpGet]
+        //public ActionResult Stop(int id, string name)
+        //{
+        //    _repo.Stop(id, name);
 
-        /// <summary>
-        /// Restarts a service and refreshes the view.
-        /// </summary>
-        /// <param name="id">Id of the associated service.</param>
-        /// <returns>Returns the Index.cshtml</returns>
-        [HttpGet]
-        public ActionResult Restart(int id, string name)
-        {
-            _repo.Restart(id, name);
+        //    return RedirectToAction("Index", "ServiceMonitor");
+        //}
 
-            return RedirectToAction("Index", "ServiceMonitor");
-        }
+        ///// <summary>
+        ///// Restarts a service and refreshes the view.
+        ///// </summary>
+        ///// <param name="id">Id of the associated service.</param>
+        ///// <returns>Returns the Index.cshtml</returns>
+        //[HttpGet]
+        //public ActionResult Restart(int id, string name)
+        //{
+        //    _repo.Restart(id, name);
+
+        //    return RedirectToAction("Index", "ServiceMonitor");
+        //}
     }
 }
