@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using System.Diagnostics;
 
 [assembly: OwinStartup(typeof(Webclient.SignalR.Startup))]
 namespace Webclient.SignalR
