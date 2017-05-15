@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using Ninject.Parameters;
 using System.Reflection;
 using System.Web.Mvc;
 using Webclient.Helper;
@@ -14,6 +15,7 @@ namespace Webclient.Controllers
         /// The ServiceRepository executes the different actions with services.
         /// </summary>
         private IServiceRepo _repo;
+        private IPerformanceTimer _performanceTimer;
 
         /// <summary>
         /// Constructor initalizes the ServiceRepository.
@@ -23,6 +25,7 @@ namespace Webclient.Controllers
             IKernel kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
             _repo = kernel.Get<IServiceRepo>();
+            _performanceTimer = kernel.Get<IPerformanceTimer>( new ConstructorArgument("list", _repo.GetAll()));
         }
 
         /// <summary>

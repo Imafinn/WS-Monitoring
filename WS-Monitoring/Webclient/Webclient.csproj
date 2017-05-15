@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="Helper\IPerformanceTimer.cs" />
     <Compile Include="Helper\IServiceRepo.cs" />
+    <Compile Include="Helper\PerformanceTimerFake.cs" />
     <Compile Include="Helper\PerformanceTimer.cs" />
     <Compile Include="Helper\ServiceFactory.cs" />
     <Compile Include="Helper\ServiceRepo.cs" />

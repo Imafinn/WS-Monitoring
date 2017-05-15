@@ -12,7 +12,7 @@ namespace Webclient.Binding
         public override void Load()
         {
             Bind<IServiceRepo>().To<ServiceRepo>().InSingletonScope();
-            Bind<IPerformancetimer>().To<PerformanceTimer>().InSingletonScope();
+            Bind<IPerformanceTimer>().To<PerformanceTimer>().InSingletonScope();
         }
     }
 }
