@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ServiceProcess;
 using System.Management;
+using System.Diagnostics;
 
 namespace Webclient.Models
 {
@@ -70,7 +71,7 @@ namespace Webclient.Models
             get
             {
                 ManagementObject wmiService = new ManagementObject($"Win32_Service.Name='{Service.ServiceName}'");
-                wmiService.Get();
+                wmiService.Get();      
 
                 // No .ToString() for the description, because it could be null and that would cause an exception.
                 return (string)wmiService["Description"] ?? "No description avaiable!"; ;
@@ -86,6 +87,14 @@ namespace Webclient.Models
             get
             {
                 return Id + "_" + Service.ServiceName.Replace(' ', '_');
+            }
+        }
+
+        public string Performance
+        {
+            get
+            {
+                return "";
             }
         }
 
