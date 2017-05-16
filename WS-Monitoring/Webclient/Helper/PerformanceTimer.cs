@@ -26,7 +26,7 @@ namespace Webclient.Helper
         /// <summary>
         /// This is run every time the timer ticks
         /// </summary>
-        private void OnTickEvent(object source, ElapsedEventArgs e)
+        public void OnTickEvent(object source, ElapsedEventArgs e)
         {
             foreach (ServiceFull service in ServiceList)
             {
