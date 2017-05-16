@@ -14,6 +14,7 @@ namespace Webclient.Helper
         /// </summary>
         /// <returns>List of services with extended informations.</returns>
         List<ServiceFull> GetAll();
+        ServiceFull GetServiceById(int id);
         /// <summary>
         /// Starts the service with the given id.
         /// </summary>

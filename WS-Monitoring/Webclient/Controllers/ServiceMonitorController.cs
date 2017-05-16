@@ -1,5 +1,7 @@
-﻿using Ninject;
+﻿using Newtonsoft.Json;
+using Ninject;
 using Ninject.Parameters;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Webclient.Helper;
@@ -36,6 +38,12 @@ namespace Webclient.Controllers
         public ActionResult Index()
         {
             return View(_repo.GetAll());
+        }
+
+        [HttpGet]
+        public string GetServiceById(int id)
+        {
+            return JsonConvert.SerializeObject(_repo.GetServiceById(id));
         }
 
         // Start, Stop & Restart Methods aren't used anymore. This calls will be done by JS(SignalR).

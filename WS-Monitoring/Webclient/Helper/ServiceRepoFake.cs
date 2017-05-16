@@ -27,6 +27,11 @@ namespace Webclient.Helper
             return _services;
         }
 
+        public ServiceFull GetServiceById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Restart(int id, string name)
         {
             ServiceFull service = _services.First(s => s.Id == id && s.ServiceName.Equals(name));

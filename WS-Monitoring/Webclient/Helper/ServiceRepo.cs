@@ -48,6 +48,11 @@ namespace Webclient.Helper
             return _servicesExtended;
         }
 
+        public ServiceFull GetServiceById(int id)
+        {
+            return _servicesExtended.Where(s => s.Id == id).First();
+        }
+
         public void Restart(int id, string name)
         {
             ServiceController service = ReceiveCurrentServiceController(id, name);
