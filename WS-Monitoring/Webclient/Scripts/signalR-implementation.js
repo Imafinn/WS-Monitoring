@@ -17,10 +17,18 @@
         console.log("ID:" + id + ",STATUS:" + status);
         var divId = '#section_' + id;
         var toUpdateDiv = $(divId);
-        console.log(toUpdateDiv);
-        var statusFont = toUpdateDiv.find($('.status'));
-        console.log(statusFont);
-        statusFont.innerHTML = status;
+        var statusText = toUpdateDiv.find($('.status'))[0];
+        statusText.innerHTML = status;
+
+        if (status == "Running") {
+            toUpdateDiv.find('.button-start')[0].disabled = true;
+            toUpdateDiv.find('.button-stop')[0].disabled = false;
+            toUpdateDiv.find('.button-restart')[0].disabled = false;
+        } else if (status == "Stopped") {
+            toUpdateDiv.find('.button-start')[0].disabled = false;
+            toUpdateDiv.find('.button-stop')[0].disabled = true;
+            toUpdateDiv.find('.button-restart')[0].disabled = true;
+        }
     };
 
     $.connection.hub.start().done(function () {
