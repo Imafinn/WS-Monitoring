@@ -57,8 +57,8 @@ namespace Webclient.Helper
                                 "Process", "Working Set - Private", process.ProcessName, true);
                             myAppCpu.NextValue();
                             service.PerformanceRAM = (myAppRam.NextValue() / (int)(1024)).ToString();
-                            Thread.Sleep(1000);
-                            service.PerformanceCPU = myAppCpu.NextValue().ToString();
+                            Thread.Sleep(250);
+                            service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString();
                         }
                     }
                     catch (Win32Exception)
@@ -82,7 +82,7 @@ namespace Webclient.Helper
         {
             System.Timers.Timer aTimer = new System.Timers.Timer();
             aTimer.Elapsed += new ElapsedEventHandler(OnTickEvent);
-            aTimer.Interval = 5000;
+            aTimer.Interval = 500;
             aTimer.Enabled = true;
         }
 
