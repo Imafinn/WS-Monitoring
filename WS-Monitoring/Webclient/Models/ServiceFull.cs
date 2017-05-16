@@ -58,7 +58,7 @@ namespace Webclient.Models
         {
             get
             {
-                return Service.Status.ToString().ToLower();
+                return Service.Status.ToString();
             }
         }
 
