@@ -2,23 +2,24 @@
     var hub = $.connection.serviceController;
     console.log(hub);
     $('.button-start').each(function () {
-        this.onclick = function () { startService(getServerId(this.id)) };
+        this.onclick = function () { startService(getServerId(this.id)); };
     });
 
     $('.button-restart').each(function () {
-        this.onclick = function () { restartService(getServerId(this.id)) };
+        this.onclick = function () { restartService(getServerId(this.id)); };
     });
 
     $('.button-stop').each(function () {
-        this.onclick = function () { stopService(getServerId(this.id)) };
+        this.onclick = function () { stopService(getServerId(this.id)); };
     });
 
     hub.client.onServiceStatusChanged = function (id, status) {
         console.log("ID:" + id + ",STATUS:" + status);
         var divId = '#section_' + id;
         var toUpdateDiv = $(divId);
-        var statusText = toUpdateDiv.find($('.status'))[0];
+        var statusText = toUpdateDiv.find($('#status-' + id))[0];
         statusText.innerHTML = status;
+        statusText.className = 'status_' + status;
 
         if (status == "Running") {
             toUpdateDiv.find('.button-start')[0].disabled = true;
