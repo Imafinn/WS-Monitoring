@@ -61,16 +61,6 @@ namespace Webclient.Helper
                             service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString();
                         }
                     }
-                    catch (Win32Exception)
-                    {
-                        // Thrown if process is already terminating,
-                        // the process is a Win16 exe or the process
-                        // could not be terminated.
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // Thrown if the process has already terminated.
-                    }
                 }
             }
         }
