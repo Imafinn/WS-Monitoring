@@ -26,7 +26,7 @@ namespace Webclient.Helper
         /// <summary>
         /// This is run every time the timer ticks
         /// </summary>
-        private void OnTickEvent(object source, ElapsedEventArgs e)
+        public void OnTickEvent(object source, ElapsedEventArgs e)
         {
             foreach (ServiceFull service in ServiceList)
             {
@@ -60,6 +60,12 @@ namespace Webclient.Helper
                             Thread.Sleep(250);
                             service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString();
                         }
+                    }
+                    catch (Win32Exception)
+                    {
+                    }
+                    catch (InvalidOperationException)
+                    {
                     }
                 }
             }
