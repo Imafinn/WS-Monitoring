@@ -2,6 +2,7 @@
 using System.ServiceProcess;
 using System.Linq;
 using Webclient.Models;
+using System.Diagnostics;
 
 namespace Webclient.Helper
 {
@@ -57,20 +58,22 @@ namespace Webclient.Helper
             service.Refresh();
         }
 
-        public void Start(int id, string name)
+        public ServiceControllerStatus Start(int id, string name)
         {
             ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Start();
             service.WaitForStatus(ServiceControllerStatus.Running);
             service.Refresh();
+            return service.Status;
         }
 
-        public void Stop(int id, string name)
+        public ServiceControllerStatus Stop(int id, string name)
         {
             ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Stop();
             service.WaitForStatus(ServiceControllerStatus.Stopped);
             service.Refresh();
+            return service.Status;
         }
 
         /// <summary>

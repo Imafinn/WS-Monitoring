@@ -20,14 +20,14 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 @foreach (var s in Model)
 {
     <!-- Service -->
-    <div class="panel panel-default" id="section_@s.Identification">
+    <div class="panel panel-default" id="section_@s.Id">
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6">@s.DisplayName : @s.Id</div>
                         <!-- TODO: Farbe pro Status anpassen => mit Dictionary in ViewBag -->
-                        <div class="col-sm-12 col-md-6 col-lg-6"><font color="@ViewBag.FontColors[s.Status]">@s.Status</font></div>
+                        <div class="col-sm-12 col-md-6 col-lg-6"><font class="status" color="@ViewBag.FontColors[s.Status]">@s.Status</font></div>
                     </div>
                     <br />
                     <div class="panel-group">
@@ -67,13 +67,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                     <div class="row">
                         @if (s.Status.Equals("stopped") || s.Status.Equals("paused"))
                         {
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input type="button" class="btn btn-success" value="Start" onclick="startService()"></div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input type="button" class="btn btn-danger" value="Stop" disabled></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="start-@s.Id" type="button" class="btn btn-success button-start" value="Start"></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="stop-@s.Id" type="button" class="btn btn-danger button-stop" value="Stop" disabled></div>
                         }
                         else
                         {
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input type="button" class="btn btn-success" value="Start" disabled></div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input type="button" class="btn btn-danger" value="Stop" onclick="stopService()" ></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="start-@s.Id" type="button" class="btn btn-success button-start" value="Start" disabled></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="stop-@s.Id" type="button" class="btn btn-danger button-stop" value="Stop"></div>
                         }
                         <!--
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Start", "Start", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-success" })</div>
@@ -81,7 +81,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">@Html.ActionLink("Restart", "Restart", new { id = s.Id, name = s.ServiceName }, new { @class = "btn btn-warning" })</div>
                         -->
                         
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input type="button" class="btn btn-warning" value="Restart" onclick="restartService()"></div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="restart-@s.Id" type="button" class="btn btn-warning button-restart" value="Restart"></div>
                     </div>
                 </div>
             </div>

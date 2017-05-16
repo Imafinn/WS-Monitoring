@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceProcess;
 using Webclient.Models;
 
 namespace Webclient.Helper
@@ -42,6 +43,16 @@ namespace Webclient.Helper
         {
             ServiceFull service = _services.First(s => s.Id == id && s.ServiceName.Equals(name));
             Console.WriteLine("Stopping Service: " + service.ServiceName);
+        }
+
+        ServiceControllerStatus IServiceRepo.Start(int id, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        ServiceControllerStatus IServiceRepo.Stop(int id, string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }
