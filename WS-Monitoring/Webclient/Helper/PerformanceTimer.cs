@@ -33,39 +33,41 @@ namespace Webclient.Helper
                 string query = $"SELECT ProcessId FROM Win32_Service WHERE Name = '{service.ServiceName}'";
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
 
-
-                foreach (ManagementObject obj in searcher.Get())
+                if (service.Status.Equals("Running"))
                 {
-                    int processId = Int32.Parse(obj["processId"].ToString());
-                    Process process = null;
-                    try
+                    foreach (ManagementObject obj in searcher.Get())
                     {
-                        process = Process.GetProcessById((int)processId);
-                    }
-                    catch (ArgumentException)
-                    {
-                        // Thrown if the process specified by processId
-                        // is no longer running.
-                    }
-                    try
-                    {
-                        if (process != null)
+                        int processId = Int32.Parse(obj["processId"].ToString());
+                        Process process = null;
+                        try
                         {
-                            PerformanceCounter myAppCpu = new PerformanceCounter(
-                                "Process", "% Processor Time", process.ProcessName, true);
-                            PerformanceCounter myAppRam = new PerformanceCounter(
-                                "Process", "Working Set - Private", process.ProcessName, true);
-                            myAppCpu.NextValue();
-                            service.PerformanceRAM = (myAppRam.NextValue() / (int)(1024)).ToString();
-                            Thread.Sleep(250);
-                            service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString();
+                            process = Process.GetProcessById((int)processId);
                         }
-                    }
-                    catch (Win32Exception)
-                    {
-                    }
-                    catch (InvalidOperationException)
-                    {
+                        catch (ArgumentException)
+                        {
+                            // Thrown if the process specified by processId
+                            // is no longer running.
+                        }
+                        try
+                        {
+                            if (process != null)
+                            {
+                                PerformanceCounter myAppCpu = new PerformanceCounter(
+                                    "Process", "% Processor Time", process.ProcessName, true);
+                                PerformanceCounter myAppRam = new PerformanceCounter(
+                                    "Process", "Working Set - Private", process.ProcessName, true);
+                                myAppCpu.NextValue();
+                                service.PerformanceRAM = (myAppRam.NextValue() / (int)(1024)+" KB").ToString();
+                                Thread.Sleep(250);
+                                service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString();
+                            }
+                        }
+                        catch (Win32Exception)
+                        {
+                        }
+                        catch (InvalidOperationException)
+                        {
+                        }
                     }
                 }
             }
