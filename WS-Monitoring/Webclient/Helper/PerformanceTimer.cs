@@ -13,14 +13,20 @@ namespace Webclient.Helper
 {
     public class PerformanceTimer : IPerformanceTimer
     {
-
+        /// <summary>
+        /// Creates a new timer for monitoring CPU and RAM usage of service processes.
+        /// </summary>
+        /// <param name="list">The list of services</param>
         public PerformanceTimer(List<ServiceFull> list)
         {
             ServiceList = list;
             TimerInit();
         }
 
-        public void OnTickEvent(object source, ElapsedEventArgs e)
+        /// <summary>
+        /// This is run every time the timer ticks
+        /// </summary>
+        private void OnTickEvent(object source, ElapsedEventArgs e)
         {
             foreach (ServiceFull service in ServiceList)
             {
@@ -69,6 +75,9 @@ namespace Webclient.Helper
             }
         }
 
+        /// <summary>
+        /// Initializes a new timer ticking after 5 seconds
+        /// </summary>
         public void TimerInit()
         {
             System.Timers.Timer aTimer = new System.Timers.Timer();
