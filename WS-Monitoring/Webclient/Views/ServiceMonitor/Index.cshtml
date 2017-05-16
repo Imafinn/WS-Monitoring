@@ -55,14 +55,14 @@
 
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="row">
-                        @if (s.Status.Equals("stopped") || s.Status.Equals("paused"))
+                        @if (s.Status.Equals("Stopped") || s.Status.Equals("Paused"))
                         {
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="start-@s.Id" type="button" class="btn btn-success button-start" value="Start"></div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="stop-@s.Id" type="button" class="btn btn-danger button-stop" value="Stop" disabled></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="stop-@s.Id" type="button" class="btn btn-danger button-stop" value="Stop" disabled="disabled"></div>
                         }
                         else
                         {
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="start-@s.Id" type="button" class="btn btn-success button-start" value="Start" disabled></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="start-@s.Id" type="button" class="btn btn-success button-start" value="Start" disabled="disabled"></div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="stop-@s.Id" type="button" class="btn btn-danger button-stop" value="Stop"></div>
                         }
                         <!--
