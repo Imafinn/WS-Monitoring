@@ -1,4 +1,4 @@
-﻿body {
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -21,4 +21,29 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* Status font colors for dynamic coloring. */
+.status_Stopped {
+    color : red;
+}
+
+.status_Startpending {
+    color : lightgreen;
+}
+
+.status_Stoppending {
+    color : lightcoral;
+}
+
+.status_Running {
+    color : green;
+}
+
+.status_Continuepending, .status_Pausepending {
+    color : orange;
+}
+
+.status_Paused {
+    color : grey;
 }

@@ -4,15 +4,6 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
-    // Dictionary for the colorization of the status
-    ViewBag.FontColors = new Dictionary<string, string>();
-    ViewBag.FontColors.Add("stopped", "red");
-    ViewBag.FontColors.Add("startpending", "lightgreen");
-    ViewBag.FontColors.Add("stoppending", "lightred");
-    ViewBag.FontColors.Add("running", "green");    
-    ViewBag.FontColors.Add("continuepending", "orange");
-    ViewBag.FontColors.Add("pausepending", "orange");
-    ViewBag.FontColors.Add("paused", "grey");
 }
 
 <h2>Monitor</h2>
@@ -27,7 +18,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6">@s.DisplayName : @s.Id</div>
                         <!-- TODO: Farbe pro Status anpassen => mit Dictionary in ViewBag -->
-                        <div class="col-sm-12 col-md-6 col-lg-6"><font class="status" color="@ViewBag.FontColors[s.Status]">@s.Status</font></div>
+                        <div class="col-sm-12 col-md-6 col-lg-6"><p class="status_@s.Status">@s.Status</p></div>
                     </div>
                     <br />
                     <div class="panel-group">
