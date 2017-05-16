@@ -29,24 +29,26 @@ namespace Webclient.SignalR
         {
             string name = _repo.GetAll().Where(s => s.Id.Equals(id)).First().ServiceName;
             ServiceControllerStatus status = _repo.Start(id, name);
-            NotifyServerStatusChanged(id, status);
+            NotifyServiceStatusChanged(id, status);
         }
 
         public void RestartService(int id)
         {
-            Debug.WriteLine($"ID:{id}");
             string name = _repo.GetAll().Where(s => s.Id.Equals(id)).First().ServiceName;
-            _repo.Restart(id, name);
+            ServiceControllerStatus status = _repo.Stop(id, name);
+            NotifyServiceStatusChanged(id, status);
+            status = _repo.Start(id, name);
+            NotifyServiceStatusChanged(id, status);
         }
 
         public void StopService(int id)
         {
             string name = _repo.GetAll().Where(s => s.Id.Equals(id)).First().ServiceName;
             ServiceControllerStatus status = _repo.Stop(id, name);
-            NotifyServerStatusChanged(id, status);
+            NotifyServiceStatusChanged(id, status);
         }
 
-        public void NotifyServerStatusChanged(int id, ServiceControllerStatus status)
+        public void NotifyServiceStatusChanged(int id, ServiceControllerStatus status)
         {
             Clients.All.onServiceStatusChanged(id, status.ToString());
         }
