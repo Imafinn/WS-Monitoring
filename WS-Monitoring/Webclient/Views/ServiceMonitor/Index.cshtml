@@ -39,30 +39,38 @@
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 centered">
-                            <h4>CPU Usage</h4>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+                            <h4><label>CPU Usage</label></h4>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 centered">
-                            <p>@s.PerformanceCPU - - @s.PerformanceRAM</p>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center">
+                            [graph]
                         </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><label>CPU:</label></div>
+                               <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">@s.PerformanceCPU</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><label>RAM:</label></div>
+                                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">@s.PerformanceRAM</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-sm-12 col-md-4 col-lg-4">
                     <div class="row">
-                        @if (s.Status.Equals("stopped") || s.Status.Equals("paused"))
+                        @if (s.Status.Equals("Stopped") || s.Status.Equals("Paused"))
                         {
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="start-@s.Id" type="button" class="btn btn-success button-start" value="Start"></div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="stop-@s.Id" type="button" class="btn btn-danger button-stop" value="Stop" disabled></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="stop-@s.Id" type="button" class="btn btn-danger button-stop" value="Stop" disabled="disabled"></div>
                         }
                         else
                         {
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="start-@s.Id" type="button" class="btn btn-success button-start" value="Start" disabled></div>
+                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="start-@s.Id" type="button" class="btn btn-success button-start" value="Start" disabled="disabled"></div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input id="stop-@s.Id" type="button" class="btn btn-danger button-stop" value="Stop"></div>
                         }
                         <!--
