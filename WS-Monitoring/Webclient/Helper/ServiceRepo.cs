@@ -19,6 +19,9 @@ namespace Webclient.Helper
         /// List received by the ServiceController, it contains the extended services.
         /// </summary>
         private List<ServiceFull> _servicesExtended;
+        /// <summary>
+        /// Factory which returns the needed services.
+        /// </summary>
         private ServiceFactory _serviceFactory;
 
         /// <summary>
@@ -37,10 +40,6 @@ namespace Webclient.Helper
                     _servicesExtended.Add(new ServiceFull(s) { Id = _servicesExtended.Count + 1 });
                 }
             }
-            //foreach (ServiceController s in _serviceFactory.GetAllServices())
-            //{
-            //    _servicesExtended.Add(new ServiceFull(s) { Id = _servicesExtended.Count + 1 });
-            //}
         }
 
         public List<ServiceFull> GetAll()
@@ -72,6 +71,11 @@ namespace Webclient.Helper
             return service.Status;
         }
 
+        /// <summary>
+        /// Stops the service with the given Id.
+        /// </summary>
+        /// <param name="id">Id of the associated service.</param>
+        /// <param name="name">Name of the associated service.</param>
         public ServiceControllerStatus Stop(int id, string name)
         {
             ServiceController service = ReceiveCurrentServiceController(id, name);

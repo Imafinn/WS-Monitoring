@@ -14,6 +14,9 @@ using Newtonsoft.Json;
 
 namespace Webclient.SignalR.Performance
 {
+    /// <summary>
+    /// Not in use yet.
+    /// </summary>
     [HubName("performanceController")]
     public class PerformanceControllerHub : Hub
     {
@@ -26,6 +29,11 @@ namespace Webclient.SignalR.Performance
             _repo = kernel.Get<IServiceRepo>();
         }
 
+        /// <summary>
+        /// Receive service from the repo.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public string GetServiceById(int id)
         {
             return JsonConvert.SerializeObject(_repo.GetAll().Where(s => s.Id == id).First());

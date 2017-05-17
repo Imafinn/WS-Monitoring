@@ -17,6 +17,9 @@ namespace Webclient.Controllers
         /// The ServiceRepository executes the different actions with services.
         /// </summary>
         private IServiceRepo _repo;
+        /// <summary>
+        /// Updates the performance from time to time.
+        /// </summary>
         private IPerformanceTimer _performanceTimer;
 
         /// <summary>
@@ -40,6 +43,11 @@ namespace Webclient.Controllers
             return View(_repo.GetAll());
         }
 
+        /// <summary>
+        /// Receives a single service with a given id.
+        /// </summary>
+        /// <param name="id">Id of the associated service.</param>
+        /// <returns>A Json string for an ajax-call.</returns>
         [HttpGet]
         public string GetServiceById(int id)
         {
