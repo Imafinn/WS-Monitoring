@@ -26,7 +26,7 @@ namespace Webclient.Controllers
         /// Constructor initalizes the ServiceRepository.
         /// </summary>
         public ServiceMonitorController()
-        {
+        { 
             IKernel kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
             _repo = kernel.Get<IServiceRepo>();
