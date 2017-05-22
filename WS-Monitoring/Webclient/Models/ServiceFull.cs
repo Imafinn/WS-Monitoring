@@ -86,7 +86,7 @@ namespace Webclient.Models
         {
             get
             {
-                return Id + "_" + Service.ServiceName.Replace(' ', '_');
+                return Id + "_" + Service.ServiceName.Replace(' ', '_').Replace('.', '_');
             }
         }
         /// <summary>

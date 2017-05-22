@@ -15,6 +15,12 @@ namespace Webclient.Helper
         /// <returns>List of services with extended informations.</returns>
         List<ServiceFull> GetAll();
         /// <summary>
+        /// Returns the service with the given id.
+        /// </summary>
+        /// <param name="id">Id of the service to search for.</param>
+        /// <returns>ServiceFull object if it is found by the given id.</returns>
+        ServiceFull GetServiceById(int id);
+        /// <summary>
         /// Starts the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>

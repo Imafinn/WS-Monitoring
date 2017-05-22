@@ -1,5 +1,7 @@
-﻿using Ninject;
+﻿using Newtonsoft.Json;
+using Ninject;
 using Ninject.Parameters;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using Webclient.Helper;
@@ -15,6 +17,9 @@ namespace Webclient.Controllers
         /// The ServiceRepository executes the different actions with services.
         /// </summary>
         private IServiceRepo _repo;
+        /// <summary>
+        /// Updates the performance from time to time.
+        /// </summary>
         private IPerformanceTimer _performanceTimer;
 
         /// <summary>
@@ -36,6 +41,17 @@ namespace Webclient.Controllers
         public ActionResult Index()
         {
             return View(_repo.GetAll());
+        }
+
+        /// <summary>
+        /// Receives a single service with a given id.
+        /// </summary>
+        /// <param name="id">Id of the associated service.</param>
+        /// <returns>A Json string for an ajax-call.</returns>
+        [HttpGet]
+        public string GetServiceById(int id)
+        {
+            return JsonConvert.SerializeObject(_repo.GetServiceById(id));
         }
 
         // Start, Stop & Restart Methods aren't used anymore. This calls will be done by JS(SignalR).

@@ -7,6 +7,7 @@ using Webclient.Models;
 namespace Webclient.Helper
 {
     /// <summary>
+    /// DEPRECATED: Do not use!
     /// FakeRepository attends as a MockUp and mustn't be needed in the final solution.
     /// </summary>
     public class ServiceRepoFake : IServiceRepo
@@ -25,6 +26,11 @@ namespace Webclient.Helper
         public List<ServiceFull> GetAll()
         {
             return _services;
+        }
+
+        public ServiceFull GetServiceById(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public void Restart(int id, string name)

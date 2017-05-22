@@ -9,6 +9,9 @@ namespace Webclient.Binding
 {
     public class NinjectBindings : NinjectModule
     {
+        /// <summary>
+        /// Initialize the dependency-injection with ninject.
+        /// </summary>
         public override void Load()
         {
             Bind<IServiceRepo>().To<ServiceRepo>().InSingletonScope();
