@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ServiceProcess;
 using Webclient.Models;
 
 namespace Webclient.Helper
@@ -20,14 +19,14 @@ namespace Webclient.Helper
         /// <param name="id">Id of the associated service.</param>
         /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceControllerStatus Start(int id, string name);
+        void Start(int id, string name);
         /// <summary>
         /// Stops the service with the given id.
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
         /// <param name="name">Name of the associated service.</param>
         /// <returns>The updated service.</returns>
-        ServiceControllerStatus Stop(int id, string name);
+        void Stop(int id, string name);
         /// <summary>
         /// Restarts the service with the given id.
         /// </summary>
