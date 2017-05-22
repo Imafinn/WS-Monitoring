@@ -2,6 +2,7 @@
 using System.ServiceProcess;
 using System.Linq;
 using Webclient.Models;
+using System.Diagnostics;
 
 namespace Webclient.Helper
 {
@@ -18,6 +19,9 @@ namespace Webclient.Helper
         /// List received by the ServiceController, it contains the extended services.
         /// </summary>
         private List<ServiceFull> _servicesExtended;
+        /// <summary>
+        /// Factory which returns the needed services.
+        /// </summary>
         private ServiceFactory _serviceFactory;
 
         /// <summary>
@@ -36,15 +40,16 @@ namespace Webclient.Helper
                     _servicesExtended.Add(new ServiceFull(s) { Id = _servicesExtended.Count + 1 });
                 }
             }
-            //foreach (ServiceController s in _serviceFactory.GetAllServices())
-            //{
-            //    _servicesExtended.Add(new ServiceFull(s) { Id = _servicesExtended.Count + 1 });
-            //}
         }
 
         public List<ServiceFull> GetAll()
         {
             return _servicesExtended;
+        }
+
+        public ServiceFull GetServiceById(int id)
+        {
+            return _servicesExtended.Where(s => s.Id == id).First();
         }
 
         public void Restart(int id, string name)
@@ -57,20 +62,27 @@ namespace Webclient.Helper
             service.Refresh();
         }
 
-        public void Start(int id, string name)
+        public ServiceControllerStatus Start(int id, string name)
         {
             ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Start();
             service.WaitForStatus(ServiceControllerStatus.Running);
             service.Refresh();
+            return service.Status;
         }
 
-        public void Stop(int id, string name)
+        /// <summary>
+        /// Stops the service with the given Id.
+        /// </summary>
+        /// <param name="id">Id of the associated service.</param>
+        /// <param name="name">Name of the associated service.</param>
+        public ServiceControllerStatus Stop(int id, string name)
         {
             ServiceController service = ReceiveCurrentServiceController(id, name);
             service.Stop();
             service.WaitForStatus(ServiceControllerStatus.Stopped);
             service.Refresh();
+            return service.Status;
         }
 
         /// <summary>

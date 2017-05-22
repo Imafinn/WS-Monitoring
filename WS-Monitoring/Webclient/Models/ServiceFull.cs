@@ -58,7 +58,7 @@ namespace Webclient.Models
         {
             get
             {
-                return Service.Status.ToString().ToLower();
+                return Service.Status.ToString();
             }
         }
 
@@ -86,17 +86,20 @@ namespace Webclient.Models
         {
             get
             {
-                return Id + "_" + Service.ServiceName.Replace(' ', '_');
+                return Id + "_" + Service.ServiceName.Replace(' ', '_').Replace('.', '_');
             }
         }
+        /// <summary>
+        /// A property to monitor the CPU usage of the service process.
+        /// </summary>
+        /// <value>Contains a String with the current CPU usage of the service</value>
+        public string PerformanceCPU { get; set; }
 
-        public string Performance
-        {
-            get
-            {
-                return "";
-            }
-        }
+        /// <summary>
+        /// A property to monitor the RAM usage of the service process.
+        /// </summary>
+        /// <value>Contains a String with the current RAM usage of the service</value>
+        public string PerformanceRAM { get; set; }
 
         /// <summary>
         /// Service property.
