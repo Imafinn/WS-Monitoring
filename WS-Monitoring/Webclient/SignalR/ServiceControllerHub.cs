@@ -14,11 +14,11 @@ using System.Reflection;
 namespace Webclient.SignalR
 {
     [HubName("serviceController")]
-    public class PerformanceControllerHub : Hub
+    public class ServiceControllerHub : Hub
     {
         private IServiceRepo _repo;
 
-        public PerformanceControllerHub()
+        public ServiceControllerHub()
         {
             IKernel kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());

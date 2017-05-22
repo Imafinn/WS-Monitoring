@@ -21,7 +21,7 @@ namespace Webclient.Helper
         {
             ServiceList list = new ServiceList();
             List<ServiceXML> items = new List<ServiceXML>();
-            using (var reader = new StreamReader("G:/PUBLIC/winflex/test.xml"))
+            using (var reader = new StreamReader("C:/wstest/test.xml"))
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(ServiceList),
                     new XmlRootAttribute("services"));
