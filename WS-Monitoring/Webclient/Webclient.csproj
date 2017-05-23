@@ -179,7 +179,6 @@
     <Compile Include="Models\ServiceXML.cs" />
     <Compile Include="Models\ServiceList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignalR\Performance\PerformanceControllerHub.cs" />
     <Compile Include="SignalR\ServiceControllerHub.cs" />
     <Compile Include="SignalR\Startup.cs" />
   </ItemGroup>
@@ -233,7 +232,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\signalR-performance.js" />
     <Content Include="Scripts\signalR-implementation.js" />
     <Content Include="Scripts\tether.js" />
     <Content Include="Scripts\tether.min.js" />

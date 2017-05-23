@@ -17,24 +17,28 @@ namespace Webclient.SignalR
     public class ServiceControllerHub : Hub
     {
         private IServiceRepo _repo;
+        public static ServiceControllerHub serviceControllerHub;
 
         public ServiceControllerHub()
         {
             IKernel kernel = new StandardKernel();
             kernel.Load(Assembly.GetExecutingAssembly());
             _repo = kernel.Get<IServiceRepo>();
+            serviceControllerHub = this;
         }
 
         public void StartService(int id)
         {
-            string name = _repo.GetAll().Where(s => s.Id.Equals(id)).First().ServiceName;
+            ServiceFull service = _repo.GetAll().Where(s => s.Id.Equals(id)).First();
+            string name = service.ServiceName;
             ServiceControllerStatus status = _repo.Start(id, name);
             NotifyServiceStatusChanged(id, status);
         }
 
         public void RestartService(int id)
         {
-            string name = _repo.GetAll().Where(s => s.Id.Equals(id)).First().ServiceName;
+            ServiceFull service = _repo.GetAll().Where(s => s.Id.Equals(id)).First();
+            string name = service.ServiceName;
             ServiceControllerStatus status = _repo.Stop(id, name);
             NotifyServiceStatusChanged(id, status);
             status = _repo.Start(id, name);
@@ -43,7 +47,8 @@ namespace Webclient.SignalR
 
         public void StopService(int id)
         {
-            string name = _repo.GetAll().Where(s => s.Id.Equals(id)).First().ServiceName;
+            ServiceFull service = _repo.GetAll().Where(s => s.Id.Equals(id)).First();
+            string name = service.ServiceName;
             ServiceControllerStatus status = _repo.Stop(id, name);
             NotifyServiceStatusChanged(id, status);
         }
@@ -51,6 +56,15 @@ namespace Webclient.SignalR
         public void NotifyServiceStatusChanged(int id, ServiceControllerStatus status)
         {
             Clients.All.onServiceStatusChanged(id, status.ToString());
+        }
+        public void NotifyPerformanceChanged(ServiceFull service)
+        {
+            Clients.All.onPerformanceChanged(service.Id, service.PerformanceCPU, service.PerformanceRAM);
+        }
+
+        public void StartTimer()
+        {
+
         }
     }
 }

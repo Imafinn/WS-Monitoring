@@ -30,7 +30,19 @@
             toUpdateDiv.find('.button-stop')[0].disabled = true;
             toUpdateDiv.find('.button-restart')[0].disabled = true;
         }
-    };
+	};
+
+	hub.client.onPerformanceChanged = function (id, cpu, ram) {
+
+		var divId = '#section_' + id;
+		var toUpdateDiv = $(divId);
+		var cpuText = toUpdateDiv.find($('#cpu-' + id))[0];
+		var ramText = toUpdateDiv.find($('#ram-' + id))[0];
+		
+		cpuText.innerHTML = cpu;
+		ramText.innerHTML = ram;
+
+	};
 
     $.connection.hub.start().done(function () {
 

@@ -4,10 +4,13 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Management;
+using System.Runtime.CompilerServices;
+using System.ServiceProcess;
 using System.Threading;
 using System.Timers;
 using System.Web;
 using Webclient.Models;
+using Webclient.SignalR;
 
 namespace Webclient.Helper
 {
@@ -22,7 +25,7 @@ namespace Webclient.Helper
             ServiceList = list;
             TimerInit();
         }
-
+        
         /// <summary>
         /// This is run every time the timer ticks
         /// </summary>
@@ -32,42 +35,65 @@ namespace Webclient.Helper
             {
                 string query = $"SELECT ProcessId FROM Win32_Service WHERE Name = '{service.ServiceName}'";
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
-
-                if (service.Status.Equals("Running"))
+                
+                foreach (ManagementObject obj in searcher.Get())
                 {
-                    foreach (ManagementObject obj in searcher.Get())
+                    int processId = Int32.Parse(obj["processId"].ToString());
+                    Process process = null;
+                    try
                     {
-                        int processId = Int32.Parse(obj["processId"].ToString());
-                        Process process = null;
-                        try
+                        process = Process.GetProcessById((int)processId);
+                    }
+                    catch (ArgumentException)
+                    {
+                        // Thrown if the process specified by processId
+                        // is no longer running.
+                    }
+                    try
+                    {
+                        if (process != null && process.Id > 0)
                         {
-                            process = Process.GetProcessById((int)processId);
-                        }
-                        catch (ArgumentException)
-                        {
-                            // Thrown if the process specified by processId
-                            // is no longer running.
-                        }
-                        try
-                        {
-                            if (process != null)
+                            
+                            PerformanceCounter myAppCpu = new PerformanceCounter(
+                                "Process", "% Processor Time", process.ProcessName, true);
+                            PerformanceCounter myAppRam = new PerformanceCounter(
+                                "Process", "Working Set - Private", process.ProcessName, true);
+
+                            myAppCpu.NextValue();
+                            service.PerformanceRAM = (myAppRam.NextValue() / (int)(1024) + " KB").ToString();
+                            Thread.Sleep(250);
+                            service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString() + " %";
+
+                            try
                             {
-                                PerformanceCounter myAppCpu = new PerformanceCounter(
-                                    "Process", "% Processor Time", process.ProcessName, true);
-                                PerformanceCounter myAppRam = new PerformanceCounter(
-                                    "Process", "Working Set - Private", process.ProcessName, true);
-                                myAppCpu.NextValue();
-                                service.PerformanceRAM = (myAppRam.NextValue() / (int)(1024)+" KB").ToString();
-                                Thread.Sleep(250);
-                                service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString();
+                                ServiceControllerHub.serviceControllerHub.NotifyPerformanceChanged(service);
+                            }
+                            catch (NullReferenceException)
+                            {
+                                Console.WriteLine("Hub not loaded");
                             }
                         }
-                        catch (Win32Exception)
+                        else
                         {
+                            service.PerformanceCPU = "Not";
+                            service.PerformanceRAM = "Running";
+
+                            try
+                            {
+                                ServiceControllerHub.serviceControllerHub.NotifyPerformanceChanged(service);
+                            }
+                            catch (NullReferenceException)
+                            {
+                                Console.WriteLine("Hub not loaded");
+                            }
+
                         }
-                        catch (InvalidOperationException)
-                        {
-                        }
+                    }
+                    catch (Win32Exception)
+                    {
+                    }
+                    catch (InvalidOperationException)
+                    {
                     }
                 }
             }
@@ -80,10 +106,10 @@ namespace Webclient.Helper
         {
             System.Timers.Timer aTimer = new System.Timers.Timer();
             aTimer.Elapsed += new ElapsedEventHandler(OnTickEvent);
-            aTimer.Interval = 500;
+            aTimer.Interval = 2000;
             aTimer.Enabled = true;
         }
 
-        List<ServiceFull> ServiceList { get; set; }
+        public List<ServiceFull> ServiceList { get; set; }
     }
 }
