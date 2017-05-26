@@ -40,6 +40,17 @@ textarea {
     color : green;
 }
 
+.y_axis {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+}
+.chart {
+    position: relative;
+    left: 40px;
+}
+
 .status_Continuepending, .status_Pausepending {
     color : orange;
 }

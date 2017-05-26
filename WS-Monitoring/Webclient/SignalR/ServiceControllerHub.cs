@@ -59,7 +59,7 @@ namespace Webclient.SignalR
         }
         public void NotifyPerformanceChanged(ServiceFull service)
         {
-            Clients.All.onPerformanceChanged(service.Id, service.PerformanceCPU, service.PerformanceRAM);
+            Clients.All.onPerformanceChanged(service.Id, service.PerformanceCPU, service.PerformanceRAM, service.ServiceName);
         }
 
         public void StartTimer()

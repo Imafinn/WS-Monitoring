@@ -60,9 +60,9 @@ namespace Webclient.Helper
                                 "Process", "Working Set - Private", process.ProcessName, true);
 
                             myAppCpu.NextValue();
-                            service.PerformanceRAM = (myAppRam.NextValue() / (int)(1024) + " KB").ToString();
+                            service.PerformanceRAM = (myAppRam.NextValue() / (int)(1024)).ToString();
                             Thread.Sleep(250);
-                            service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString() + " %";
+                            service.PerformanceCPU = (myAppCpu.NextValue() / Environment.ProcessorCount).ToString();
 
                             try
                             {
@@ -75,8 +75,8 @@ namespace Webclient.Helper
                         }
                         else
                         {
-                            service.PerformanceCPU = "Not";
-                            service.PerformanceRAM = "Running";
+                            service.PerformanceCPU = "0";
+                            service.PerformanceRAM = "0";
 
                             try
                             {
@@ -106,7 +106,7 @@ namespace Webclient.Helper
         {
             System.Timers.Timer aTimer = new System.Timers.Timer();
             aTimer.Elapsed += new ElapsedEventHandler(OnTickEvent);
-            aTimer.Interval = 2000;
+            aTimer.Interval = 1500;
             aTimer.Enabled = true;
         }
 
