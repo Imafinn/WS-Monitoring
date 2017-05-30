@@ -1,100 +1,78 @@
 ﻿using System.Collections.Generic;
 using System.ServiceProcess;
 using System.Linq;
-using Webclient.Models;
 using System.Diagnostics;
 using System;
+using Axa.iWARP.Database.DTO.Interface;
+using Axa.iWARP.Database.DTO.Domain.Xiwarp;
+using Axa.iWARP.Database.DTO;
+using System.IO;
+using NHibernate.Linq;
+using Webclient.Properties;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace Webclient.Helper
 {
+    public enum ChangeStatusTo
+    {
+        Start,
+        Restart,
+        Stop
+    }
+
     /// <summary>
     /// ServiceRepo executes the different actions with services.
     /// </summary>
     public class ServiceRepo : IServiceRepo
     {
         /// <summary>
-        /// List received by the XMLReader, it contains the basic services.
+        /// Speichert das FactoryRepository für die Tabelle EVENT_MSG
         /// </summary>
-        private List<ServiceXML> _servicesBasic;
-        /// <summary>
-        /// List received by the ServiceController, it contains the extended services.
-        /// </summary>
-        private List<ServiceFull> _servicesExtended;
-        /// <summary>
-        /// Factory which returns the needed services.
-        /// </summary>
-        private ServiceFactory _serviceFactory;
+        private readonly IDbFactory<Service> _tbService;
+        private NHibernateFactory dbConnection;
 
         /// <summary>
         /// In the Constructor the servicelists get initalized.
         /// </summary>
         public ServiceRepo()
         {
-            _servicesBasic = XMLReader.ReadServices();
-            _servicesExtended = new List<ServiceFull>();
-            _serviceFactory = new ServiceFactory();
+            dbConnection = new NHibernateFactory(GetDbConfigPath(), Settings.Default.stage);
+            _tbService = dbConnection.GetRepository<Service>();
+        }
 
-            foreach (ServiceXML sXML in _servicesBasic)
+        private string GetDbConfigPath()
+        {
+            // Pfad zur Datenbankkonfiguration definieren
+            string dbConfigurationPath = Environment.GetEnvironmentVariable("IWARP_DB_CONFIG");
+
+            // Pfad zur Datenbankkonfiguration für die Datenbank zusammenstellen
+            return String.Concat(dbConfigurationPath, Path.DirectorySeparatorChar,
+                Settings.Default.dbConfigFileName);
+        }
+
+        public List<Service> GetAll()
+        {
+            if (dbConnection != null)
             {
-                foreach (ServiceController s in _serviceFactory.GetServices(sXML.Name))
+                using (ISession session = dbConnection.GetSession())
                 {
-                    _servicesExtended.Add(new ServiceFull(s) { Id = _servicesExtended.Count + 1 });
+                    ICriteria criteria = session.CreateCriteria<Service>()
+                                .Add(Restrictions.IsNotNull("Status"));
+
+                    return criteria.List<Service>().ToList();
                 }
             }
-        }
-
-        public List<ServiceFull> GetAll()
-        {
-            return _servicesExtended;
-        }
-
-        public ServiceFull GetServiceById(int id)
-        {
-            return _servicesExtended.Where(s => s.Id == id).First();
-        }
-
-        public void Restart(int id, string name)
-        {
-            ServiceController service = ReceiveCurrentServiceController(id, name);
-            service.Stop();
-            service.WaitForStatus(ServiceControllerStatus.Stopped);
-            service.Start();
-            service.WaitForStatus(ServiceControllerStatus.Running);
-            service.Refresh();
-        }
-
-        public ServiceControllerStatus Start(int id, string name)
-        {
-            ServiceController service = ReceiveCurrentServiceController(id, name);
-            service.Start();
-            service.WaitForStatus(ServiceControllerStatus.Running);
-            service.Refresh();
-            return service.Status;
+            return null;
         }
 
         /// <summary>
-        /// Stops the service with the given Id.
+        /// 
         /// </summary>
         /// <param name="id">Id of the associated service.</param>
-        /// <param name="name">Name of the associated service.</param>
-        public ServiceControllerStatus Stop(int id, string name)
+        public void ChangeStatus(int id, Enum changeStatusTo)
         {
-            ServiceController service = ReceiveCurrentServiceController(id, name);
-            service.Stop();
-            service.WaitForStatus(ServiceControllerStatus.Stopped);
-            service.Refresh();
-            return service.Status;
-        }
-
-        /// <summary>
-        /// Internal method to receive the current ServiceController.
-        /// </summary>
-        /// <param name="id">Id of the current service.</param>
-        /// <param name="name">Name of the service.</param>
-        /// <returns>Returns the current ServiceController.</returns>
-        private ServiceController ReceiveCurrentServiceController(int id, string name)
-        {
-            return _servicesExtended.Where(s => s.Id == id && s.ServiceName.Equals(name)).First().Service;
+            
         }
     }
 }

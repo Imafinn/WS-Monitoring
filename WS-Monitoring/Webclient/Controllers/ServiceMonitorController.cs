@@ -42,57 +42,5 @@ namespace Webclient.Controllers
         {
             return View(_repo.GetAll());
         }
-
-        /// <summary>
-        /// Receives a single service with a given id.
-        /// </summary>
-        /// <param name="id">Id of the associated service.</param>
-        /// <returns>A Json string for an ajax-call.</returns>
-        [HttpGet]
-        public string GetServiceById(int id)
-        {
-            return JsonConvert.SerializeObject(_repo.GetServiceById(id));
-        }
-
-        // Start, Stop & Restart Methods aren't used anymore. This calls will be done by JS(SignalR).
-
-        ///// <summary>
-        ///// Starts a service and refreshes the view.
-        ///// </summary>
-        ///// <param name="id">Id of the associated service.</param>
-        ///// <returns>Returns the Index.cshtml</returns>
-        //[HttpGet]
-        //public ActionResult Start(int id, string name)
-        //{
-        //    _repo.Start(id, name);
-
-        //    return RedirectToAction("Index", "ServiceMonitor");
-        //}
-
-        ///// <summary>
-        ///// Stops a service and refreshes the view
-        ///// </summary>
-        ///// <param name="id">Id of the associated service.</param>
-        ///// <returns>Returns the Index.cshtml</returns>
-        //[HttpGet]
-        //public ActionResult Stop(int id, string name)
-        //{
-        //    _repo.Stop(id, name);
-
-        //    return RedirectToAction("Index", "ServiceMonitor");
-        //}
-
-        ///// <summary>
-        ///// Restarts a service and refreshes the view.
-        ///// </summary>
-        ///// <param name="id">Id of the associated service.</param>
-        ///// <returns>Returns the Index.cshtml</returns>
-        //[HttpGet]
-        //public ActionResult Restart(int id, string name)
-        //{
-        //    _repo.Restart(id, name);
-
-        //    return RedirectToAction("Index", "ServiceMonitor");
-        //}
     }
 }

@@ -6,10 +6,10 @@ using Microsoft.AspNet.SignalR;
 using System.ServiceProcess;
 using Microsoft.AspNet.SignalR.Hubs;
 using System.Diagnostics;
-using Webclient.Models;
 using Webclient.Helper;
 using Ninject;
 using System.Reflection;
+using Axa.iWARP.Database.DTO.Domain.Xiwarp;
 
 namespace Webclient.SignalR
 {
@@ -29,42 +29,29 @@ namespace Webclient.SignalR
 
         public void StartService(int id)
         {
-            ServiceFull service = _repo.GetAll().Where(s => s.Id.Equals(id)).First();
-            string name = service.ServiceName;
-            ServiceControllerStatus status = _repo.Start(id, name);
-            NotifyServiceStatusChanged(id, status);
+            _repo.ChangeStatus(id, ChangeStatusTo.Start);
+            // NotifyServiceStatusChanged
         }
 
         public void RestartService(int id)
         {
-            ServiceFull service = _repo.GetAll().Where(s => s.Id.Equals(id)).First();
-            string name = service.ServiceName;
-            ServiceControllerStatus status = _repo.Stop(id, name);
-            NotifyServiceStatusChanged(id, status);
-            status = _repo.Start(id, name);
-            NotifyServiceStatusChanged(id, status);
+            _repo.ChangeStatus(id, ChangeStatusTo.Restart);
+            // NotifyServiceStatusChanged
         }
 
         public void StopService(int id)
         {
-            ServiceFull service = _repo.GetAll().Where(s => s.Id.Equals(id)).First();
-            string name = service.ServiceName;
-            ServiceControllerStatus status = _repo.Stop(id, name);
-            NotifyServiceStatusChanged(id, status);
+            _repo.ChangeStatus(id, ChangeStatusTo.Stop);
+            // NotifyServiceStatusChanged
         }
 
-        public void NotifyServiceStatusChanged(int id, ServiceControllerStatus status)
+        public void NotifyServiceStatusChanged(int id, Enum newStatus)
         {
-            Clients.All.onServiceStatusChanged(id, status.ToString());
+            Clients.All.onServiceStatusChanged(id, newStatus.ToString());
         }
-        public void NotifyPerformanceChanged(ServiceFull service)
+        public void NotifyPerformanceChanged(Service service)
         {
-            Clients.All.onPerformanceChanged(service.Id, service.PerformanceCPU, service.PerformanceRAM, service.ServiceName);
-        }
-
-        public void StartTimer()
-        {
-
+            //Clients.All.onPerformanceChanged(service.Id, service.PerformanceCPU, service.PerformanceRAM, service.ServiceName);
         }
     }
 }
